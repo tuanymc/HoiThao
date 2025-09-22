@@ -1,0 +1,18 @@
+﻿@model KhoaXayDung.Models.Tin
+
+<div class="col-md-4 cottrangchu">
+    <h4 class="chumong">THÔNG TIN KHOA</h4>
+    <div class="thumbnail boxtt">
+        <a href="@Url.Action("Index", "TinTuc", new { id = @Model.MaT })">
+            @if (@Model.TenT.Length > 53)
+            {
+                <h4>@Model.TenT.Substring(0, 53) ...</h4>
+            }
+            else
+            { <h4>@Model.TenT</h4> }
+            <img src="~/img/ckeditor/Images/@Model.H" alt="...">
+            <p class="ngaydangtt"><i class="fa fa-clock-o"></i> @Html.DisplayFor(model => Model.NgayDang)  &mdash;   <i class="fa fa-eye"></i> @Model.Xem</p>
+            <p>@Model.MT</p>
+        </a>
+    </div>
+</div>

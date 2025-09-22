@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<div class="page-header">
+    <h1>Đổi mật khẩu</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label for="exampleInputEmail1">Tên đăng nhập</label>
+        <input type="email" class="form-control" value="@ViewBag.tdn" name="MaND" disabled>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password cũ</label>
+        <input type="password" class="form-control" name="passcu">
+        <label class="text-danger">@ViewBag.saipasscu</label>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password mới</label>
+        <input type="password" class="form-control" name="passmoi">
+        <label class="text-danger">@ViewBag.xacnhan</label>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Xác nhận password mới</label>
+        <input type="password" class="form-control" name="xacnhanpassmoi">
+        <label class="text-danger">@ViewBag.xacnhan</label>
+    </div>
+    <button type="submit" class="btn btn-default">Đổi mật khẩu</button>
+}
+

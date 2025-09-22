@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5552cfb785645c2a985ddef7138cd3d" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="KhoaKinhTeModel.AlbumVideoHinhAnh" Width="1.5" PointX="5" PointY="6" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.CauHoi" Width="1.5" PointX="1.5" PointY="26.75" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.CauTraLoi" Width="1.5" PointX="3.75" PointY="17" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.ChitietMenu" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Info" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LienHe" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LienKet" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LinkTuDo" Width="1.5" PointX="0.75" PointY="24" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LoaiAlbum" Width="1.5" PointX="2.75" PointY="6.5" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LoaiSlide" Width="1.5" PointX="5.75" PointY="1.5" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.LoaiTin" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Menu" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.NguoiDung" Width="1.5" PointX="1.5" PointY="16.125" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Page" Width="1.5" PointX="0.75" PointY="11.25" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.QCLink" Width="1.5" PointX="3.75" PointY="24.875" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Quyen" Width="1.5" PointX="1.5" PointY="21.25" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Slide" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.ThongKe" Width="1.5" PointX="9.75" PointY="7.75" />
+        <EntityTypeShape EntityType="KhoaKinhTeModel.Tin" Width="1.5" PointX="3.75" PointY="11.625" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__AlbumVide__IdAlb__5EBF139D" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__CauTraLoi__MaCH__24927208" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__CauTraLoi__MaND__25869641" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdLin__5FB337D6" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdLin__7C4F7684" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdLoa__60A75C0F" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdLoa__7D439ABD" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdMen__619B8048" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdMen__7E37BEF6" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdPag__628FA481" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__ChitietMe__IdPag__7F2BE32F" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Slide__MaLoai__02084FDA" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Slide__MaLoai__6754599E" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__LoaiTin__IDcha__00200768" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__LoaiTin__IDcha__6383C8BA" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Tin__MaLT__29572725" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__NguoiDung__MaQuy__276EDEB3" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Pages__MaND__01142BA1" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Pages__MaND__656C112C" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__QCLink__MaND__286302EC" />
+        <AssociationConnector Association="KhoaKinhTeModel.FK__Tin__MaND__2A4B4B5E" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

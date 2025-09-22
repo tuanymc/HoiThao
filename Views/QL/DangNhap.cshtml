@@ -1,0 +1,21 @@
+﻿@{
+
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutDN.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="form-group">
+            <input class="form-control transparent inputUserPass" placeholder="Tên đăng nhập..." required="required" name="MaND" type="text" autofocus autocomplete="off" />
+
+            <input class="form-control transparent inputUserPass" placeholder="Mật khẩu..." required="required" name="MatKhau" type="password" value="">
+        </div>
+        @Html.Raw(ViewBag.thongbao)
+        <div class="text-center">
+            <input type="submit" class="btn btn-danger btn-fill btnRadius" value="Đăng nhập" />
+        </div>
+    </div>
+}
+

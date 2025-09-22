@@ -1,0 +1,48 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Slide>
+<div class="row">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @foreach (var item in Model.Select((x, i) => new { value = x, index = i }))
+            {
+                string Bclass = "";
+                if (item.index == 0)
+                {
+                    Bclass = "class = \"active\"";
+                }
+                else
+                {
+                    Bclass = "";
+                }
+                <li data-target="#carousel-example-generic" data-slide-to="@item.index" @Bclass></li>
+            }
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @foreach (var item in Model)
+            {
+                string boostrapclass = "";
+                if (item == Model.First())
+                {
+                    boostrapclass = "item active";
+                }
+                else { boostrapclass = "item"; }
+                string i = item.AnhSlide;
+                <div class="@boostrapclass"><a href="@item.LinkSide" target="_blank">
+    <img src="~/img/ckeditor/Images/@i" width="1170" height="300" alt="@item.TenSlide" title="@item.TenSlide">
+</a>
+                    <div class="carousel-caption"><a href="@item.LinkSide" target="_blank">
+    <h3>@Html.DisplayFor(p => item.TenSlide)</h3>
+</a>
+</div>
+                </div>
+            }
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>

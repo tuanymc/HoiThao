@@ -1,0 +1,87 @@
+﻿@model KhoaXayDung.Models.Page
+@{
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+    ViewBag.Title =/* @ViewBag.tenlt + " - " +*/ ViewBag.Title;
+}
+
+<div id="maincontent">
+    <div class="section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12 breadcrumb">
+                    <ul>
+                        <li><a href="/">Trang Chủ<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li>
+                            <span id="dnn_dnnBreadcrumb_lblBreadCrumb"><a href="#" class="item">@ViewBag.Breadcrumb</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div id="dnn_ContentPane">
+                        <div class="DnnModule DnnModule-Tintc-HinthBoxChitittin DnnModule-10001">
+                            <a name="10001"></a>
+                            <div id="dnn_ctr10001_ContentPane">
+                                <!-- Start_Module_10001 -->
+                                <div id="dnn_ctr10001_ModuleContent">
+                                    <div class='article'>
+                                        <h3>@Model.TenT</h3>
+                                        <p class='des'></p>
+                                        <p class='content'>@Html.Raw(Model.ND)</p>
+                                        @if (Model.F != null)
+                                        {
+                                            <input type="hidden" id="pageCount" value="@ViewBag.pageCount" />
+                                            <iframe id="myFrame" onload="resizeIframe(this)" class="embed-responsive-item" src="/web/viewer.html?file=/img/ckeditor/Files/@Model.F" style="width:100%;" allowfullscreen webkitallowfullscreen></iframe>
+                                        }
+                                    </div>
+                                </div>
+                                <!-- End_Module_10001 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <div id="dnn_FooterBanner" class="DNNEmptyPane"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('img').removeAttr('style');
+
+        $('img').addClass('img-center');
+        $('img').addClass('img-responsive');
+        if ($("#myFrame").length > 0) {
+            var resInterval = setInterval(function () {
+                if ($("#myFrame").contents().find("#pdfHeight").val() != "") {
+                    var hgt = 0;
+                    hgt = $("#myFrame").contents().find("#pdfHeight").val() * 1;
+                    $("#myFrame").css({ "height": hgt + "px" }).fadeTo('10');
+                }
+            }, 75);
+        }
+    });
+    function resizeIframe(obj) {
+        obj.style.height = $('#pageCount').val() * 1200 + "px";
+    }
+</script>
+
+<script>
+    var id = $(window).height();
+    $('.article').css('min-height', (id - 300) + 'px');
+</script>

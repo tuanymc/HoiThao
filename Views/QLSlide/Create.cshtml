@@ -1,0 +1,337 @@
+﻿@model KhoaXayDung.Models.Slide
+
+@{
+    ViewBag.Title = "Thêm slide";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+<style>
+    canvas {
+        width: 100% !important;
+    }
+</style>
+
+<h2>Thêm slide</h2>
+
+@using (Html.BeginForm("Create", "QLSlide", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaLoai, "Loại slide", new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("MaLoai", null, "Chọn loại slide", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenSlide, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.TenSlide, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSlide, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.AnhSlide, new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.AnhSlide)
+                    <input type="file" id="AnhSlide" name="AnhSlide" class="form-control"/>
+                    @Html.ValidationMessageFor(model => model.AnhSlide, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LinkSide, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.LinkSide, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LinkSide, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTaSlide, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(model => model.MoTaSlide, new { @class = "form-control", style = "height:150px;resize:vertical" })
+                @Html.ValidationMessageFor(model => model.MoTaSlide, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Show, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Show)
+                @Html.ValidationMessageFor(model => model.Show, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="frmHinh">
+            @Html.LabelFor(model => model.AnhSlide, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                <!-- image cropping -->
+                <div class="cropper">
+                    <div class="row">
+                        <div class="col-md-12 ml-auto mr-auto">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <!-- <h3 class="page-header">Demo:</h3> -->
+                                    <div class="img-container">
+                                        <img id="image" src="~/img/antoine-barres.jpg" alt="Picture" class="img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <!-- <h3 class="page-header">Preview:</h3> -->
+                                    <div class="docs-preview clearfix">
+                                        <div class="img-preview preview-lg"></div>
+                                        <div class="img-preview preview-md"></div>
+                                        <div class="img-preview preview-sm"></div>
+                                        <div class="img-preview preview-xs"></div>
+                                    </div>
+                                    <!-- <h3 class="page-header">Data:</h3> -->
+                                    <div class="docs-data">
+                                        <div class="input-group input-group-sm">
+                                            <label class="input-group-addon" for="dataX">X</label>
+                                            <input type="text" class="form-control" id="dataX" placeholder="x">
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <label class="input-group-addon" for="dataY">Y</label>
+                                            <input type="text" class="form-control" id="dataY" placeholder="y">
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <label class="input-group-addon" for="dataWidth">Chiều rộng</label>
+                                            <input type="text" class="form-control" id="dataWidth" placeholder="Chiều rộng">
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <label class="input-group-addon" for="dataHeight">Chiều cao</label>
+                                            <input type="text" class="form-control" id="dataHeight" placeholder="Chiều cao">
+                                            <span class="input-group-addon">px</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12 col-xs-12 col-12 docs-buttons ml-auto mr-auto">
+                            <!-- <h3 class="page-header">Toolbar:</h3> -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" data-method="reset" title="Reset">
+                                    <span class="docs-tooltip" data-toggle="tooltip" title="Làm mới">
+                                        <span class="fa fa-refresh"></span>
+                                        Làm mới
+                                    </span>
+                                </button>
+                                <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                    <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                    <span class="docs-tooltip" data-toggle="tooltip" title="Chọn ảnh để đăng">
+                                        <span class="fa fa-upload"></span>
+                                        Chọn ảnh
+                                    </span>
+                                </label>
+                                <button type="button" class="btn btn-success" data-method="getCroppedCanvas">
+                                    <span class="docs-tooltip" data-toggle="tooltip" title="Cắt trước khi lưu">
+                                        Lưu
+                                    </span>
+                                </button>
+                            </div>
+                            <!-- Show the cropped image in modal -->
+                            <div class="modal fade docs-cropped in" id="getCroppedCanvasModal" tabindex="-1" role="dialog" aria-labelledby="getCroppedCanvasTitle" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="padding-top: 0px;padding-bottom: 0px;">
+                                            <h4 class="modal-title" id="getCroppedCanvasTitle">Hoàn Thành</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        </div>
+                                        <div class="modal-footer text-center">
+                                            <input type="hidden" id="idcropAnh" name="H" />
+                                            @*<input type="hidden" value="@User.InFo().Id" name="idhocvien" />*@
+                                            <input type="submit" class="btn btn-success" value="Xác nhận lưu" />
+                                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.png">Tải xuống</a>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.modal -->
+                        </div>
+                        <!-- /.docs-toggles -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-6">
+                    <input type="submit" value="Thêm" class="btn btn-success" />
+                </div>
+                <div class="col-md-offset-2 col-md-6">
+                    @Html.Raw(ViewBag.error)
+                </div>
+            </div>*@
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Danh sách slide", "Index")
+</div>
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        AspectRatio();
+
+        function AspectRatio() {
+            var inputImage = $('#idcropAnh');
+            var $image = $('#image');
+            var $download = $('#download');
+            var $dataX = $('#dataX');
+            var $dataY = $('#dataY');
+            var $dataHeight = $('#dataHeight');
+            var $dataWidth = $('#dataWidth');
+            var $dataRotate = $('#dataRotate');
+            var $dataScaleX = $('#dataScaleX');
+            var $dataScaleY = $('#dataScaleY');
+
+            var options = {
+                aspectRatio: 5.3 / 2,
+                preview: '.img-preview',
+                crop: function (e) {
+                    $dataX.val(Math.round(e.x));
+                    $dataY.val(Math.round(e.y));
+                    $dataHeight.val(Math.round(e.height));
+                    $dataWidth.val(Math.round(e.width));
+                }
+            }
+            // Cropper
+            $image.on({
+                'build.cropper': function (e) {
+
+                },
+                'built.cropper': function (e) {
+
+                },
+                'cropstart.cropper': function (e) {
+
+                },
+                'cropmove.cropper': function (e) {
+
+                },
+                'cropend.cropper': function (e) {
+
+                },
+                'crop.cropper': function (e) {
+
+                }
+            }).cropper(options);
+
+            // Buttons
+            if (!$.isFunction(document.createElement('canvas').getContext)) {
+                $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+            }
+            if (typeof document.createElement('cropper').style.transition === 'undefined') {
+                $('button[data-method="rotate"]').prop('disabled', true);
+                $('button[data-method="scale"]').prop('disabled', true);
+            }
+            // Download
+            if (typeof $download[0].download === 'undefined') {
+                $download.addClass('disabled');
+            }
+            // Methods
+            $('.docs-buttons').on('click', '[data-method]', function () {
+                var $this = $(this);
+                var data = $this.data();
+                var $target;
+                var result;
+
+                if ($this.prop('disabled') || $this.hasClass('disabled')) {
+                    return;
+                }
+
+                if ($image.data('cropper') && data.method) {
+                    data = $.extend({}, data); // Clone a new one
+                    if (typeof data.target !== 'undefined') {
+                        $target = $(data.target);
+
+                        if (typeof data.option === 'undefined') {
+                            try {
+                                data.option = JSON.parse($target.val());
+                            } catch (e) {
+                                console.log(e.message);
+                            }
+                        }
+                    }
+                    result = $image.cropper(data.method, data.option, data.secondOption);
+                    switch (data.method) {
+                        case 'scaleX':
+                        case 'scaleY':
+                            $(this).data('option', -data.option);
+                            break;
+                        case 'getCroppedCanvas':
+                            if (result) {
+
+                                // Bootstrap's Modal
+                                $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+                                if (!$download.hasClass('disabled')) {
+                                    var x = result.toDataURL();
+
+
+                                    inputImage.val(x.replace('data:image/png;base64,', ''));
+                                    $download.attr('href', result.toDataURL());
+                                }
+                            }
+                            break;
+                    }
+                    if ($.isPlainObject(result) && $target) {
+                        try {
+                            $target.val(JSON.stringify(result));
+                        } catch (e) {
+                            console.log(e.message);
+                        }
+                    }
+                }
+            });
+            // Import image
+            var $inputImage = $('#inputImage');
+            var URL = window.URL || window.webkitURL;
+            var blobURL;
+
+            if (URL) {
+                $inputImage.change(function () {
+                    var files = this.files;
+                    var file;
+                    if (!$image.data('cropper')) {
+                        return;
+                    }
+                    if (files && files.length) {
+                        file = files[0];
+                        if (/^image\/\w+$/.test(file.type)) {
+                            blobURL = URL.createObjectURL(file);
+                            $image.one('built.cropper', function () {
+
+                                // Revoke when load complete
+                                URL.revokeObjectURL(blobURL);
+                            }).cropper('reset').cropper('replace', blobURL);
+                            $inputImage.val('');
+                        } else {
+                            window.alert('Please choose an image file.');
+                        }
+                    }
+                });
+            } else {
+                $inputImage.prop('disabled', true).parent().addClass('disabled');
+            }
+        }
+    });
+</script>
+<!-- /Cropper -->

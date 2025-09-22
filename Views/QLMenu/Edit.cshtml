@@ -1,0 +1,125 @@
+﻿
+@model KhoaXayDung.Models.Menu
+
+@{
+    ViewBag.Title = "Cập nhật Menu";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Cập nhật Menu</h2>
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    <div class="alert alert-success alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+        <strong>Thông báo!</strong> Tác vụ thành công
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenMenu, "Tên Menu", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenMenu, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" id="capnhatmenu" value="Lưu" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+<div class="row" style="min-height:1068px;">
+    <div class="col-md-12">
+        <div class="_menulist col-md-4">
+
+        </div>
+        <div class="_action col-md-8">
+
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Danh sách Menu", "Index")
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        LoadMenu('@Model.ID');
+        LoadDropList('@Model.ID');
+
+    });
+    function XoaChiTiet(id) {
+        $.ajax({
+            type: "POST",
+            url: '/QLMenu/XoaChiTietMenu',
+            data: {
+                'id': id,
+                'menu': '@Model.ID'
+            },
+            success: function (data) {
+                $('.alert').show();
+                LoadMenu('@Model.ID');
+                LoadDropList('@Model.ID');
+            }
+        });
+    }
+    $('.close').click(function () {
+        $('.alert').hide();
+    });
+
+    $('#capnhatmenu').click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/QLMenu/Edit',
+            data: {
+                'idmenu': $('#ID').val(),
+                'tenmenu': $('#TenMenu').val()
+            },
+            success: function (data) {
+                $('.alert').show();
+                LoadMenu('@Model.ID');
+                LoadDropList('@Model.ID');
+            }
+        });
+    });
+    function LoadMenu(id) {
+        $.ajax({
+            type: 'Post',
+            url: '@Url.Action("LoadMenu", "QLMenu")',
+            contenType: 'application/JSON; charset=utf-8',
+            data: { id: '@Model.ID' },
+            dataType: 'html',
+            beforeSend: function () {
+                $('._menulist').html(null);
+            },
+            complete: function () {
+
+            }
+        }).success(function (result) {
+            $('._menulist').html(result);
+        }).error(function () {
+
+        });
+    }
+    function LoadDropList(id) {
+        $.ajax({
+            type: 'Post',
+            url: '@Url.Action("LoadDropDown", "QLMenu")',
+            contenType: 'application/JSON; charset=utf-8',
+            data: { id: '@Model.ID' },
+            dataType: 'html',
+            beforeSend: function () {
+                $('._action').html(null);
+            },
+            complete: function () {
+
+            }
+        }).success(function (result) {
+            $('._action').html(result);
+        }).error(function () {
+
+        });
+    }
+</script>

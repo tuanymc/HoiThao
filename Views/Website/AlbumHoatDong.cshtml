@@ -1,0 +1,149 @@
+﻿@model IEnumerable<KhoaXayDung.Models.AlbumVideoHinhAnh>
+@using KhoaXayDung.Models;
+@{
+    ViewBag.Title = "Video Và Hình Ảnh Hoạt Động";
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+}
+
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    var listGroupBy = db.AlbumVideoHinhAnhs.GroupBy(u => u.IdAlbum).Select(m => m.ToList()).ToList();
+
+    var listAll = db.AlbumVideoHinhAnhs.ToList();
+}
+
+<style>
+    .videoWrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+    }
+
+        .videoWrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>
+<div id="maincontent">
+    <div class="section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12 breadcrumb">
+                    <ul>
+                        <li><a href="/">Trang Chủ<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li>
+                            <span id="dnn_dnnBreadcrumb_lblBreadCrumb"><a href="#" class="item">@ViewBag.TenBreadcrumb</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div id="dnn_ContentPane">
+                        <div class="DnnModule DnnModule-Tintc-HinthBoxChitittin DnnModule-10001">
+                            <a name="10001"></a>
+                            <div id="dnn_ctr10001_ContentPane">
+                                <!-- Start_Module_10001 -->
+                                <div id="dnn_ctr10001_ModuleContent">
+                                    <div class='article'>
+                                        <h3>@ViewBag.TenBreadcrumb</h3>
+                                        <p class='des'></p>
+                                        @if (Model.Count() > 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.LinkNhung != null)
+                                                {
+                                                    <div class="col-md-8 col-md-offset-2">
+                                                        <iframe width="560" height="349" src="https://www.youtube-nocookie.com/embed/@item.LinkNhung.Split('=')[1]?autoplay=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                    </div>
+                                                    <br>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-md-4" style="padding-bottom: 15px; padding-top: 15px">
+                                                        <a href="~/img/ckeditor/Images/@item.Files" title="@item.Mota" class="swipebox">
+                                                            <img src="~/img/ckeditor/Images/@item.Files" alt="@item.Mota" class="img-responsive">
+                                                        </a>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in listGroupBy)
+                                            {
+                                                <br />
+                                                <h3>@item.FirstOrDefault().LoaiAlbum.TenAlbum</h3>
+                                                foreach (var con in listAll.Where(m => m.IdAlbum == item.FirstOrDefault().IdAlbum))
+                                                {
+                                                    if (con.LinkNhung == null)
+                                                    {
+                                                        <div class="col-md-4" style="padding-bottom: 15px; padding-top: 15px">
+                                                            <a href="~/img/ckeditor/Images/@con.Files" title="@con.Mota" class="swipebox">
+                                                                <img src="~/img/ckeditor/Images/@con.Files" alt="@con.Mota" class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-md-8 col-md-offset-2">
+                                                                <iframe width="560" height="349" src="https://www.youtube-nocookie.com/embed/@con.LinkNhung.Split('=')[1]?autoplay=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                            </div>
+                                                            <br>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    </div>
+                                </div>
+                                <!-- End_Module_10001 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    // Find all YouTube videos
+    var $allVideos = $("iframe[src^='//www.youtube.com']"),
+        // The element that is fluid width
+        $fluidEl = $("body");
+    // Figure out and save aspect ratio for each video
+    $allVideos.each(function () {
+        $(this)
+            .data('aspectRatio', this.height / this.width)
+            // and remove the hard coded width/height
+            .removeAttr('height')
+            .removeAttr('width');
+    });
+    // When the window is resized
+    $(window).resize(function () {
+        var newWidth = $fluidEl.width();
+        // Resize all videos according to their own aspect ratio
+        $allVideos.each(function () {
+            var $el = $(this);
+            $el
+                .width(newWidth)
+                .height(newWidth * $el.data('aspectRatio'));
+        });
+        // Kick off one resize to fix all videos on page load
+    }).resize();
+</script>

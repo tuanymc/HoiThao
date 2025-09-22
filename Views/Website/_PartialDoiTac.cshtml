@@ -1,0 +1,25 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Slide>
+
+@if (Model.Count() > 0)
+{
+    <div id="dnn_ctr8402_ModuleContent">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding: 0px;">
+                <div id="doitacfooter">
+                    @foreach (var item in Model)
+                    {
+                        <div class='item'>
+                            <a href="@item.LinkSide">
+                                <img style="height: 100px;"src="~/img/ckeditor/Images/@item.AnhSlide" alt="" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    Layout = null;
+}

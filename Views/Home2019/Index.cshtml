@@ -1,0 +1,190 @@
+﻿@using KhoaXayDung.Models
+@{
+    ViewBag.Title = "Trang Chủ";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    var listThongTinMoi = db.Tins.Where(m => m.Show == true && (m.MaLT == 2075 || m.MaLT == 2076 || m.MaLT == 2163)).OrderByDescending(m => m.NgayDang).Take(5).ToList();
+    var listNhomTin = db.LoaiTins.Where(m => m.Show == true && (m.MaLT == 2110 || m.MaLT == 1060 || m.MaLT == 2174 || m.MaLT == 2096 || m.MaLT == 2092 || m.MaLT == 2179 || m.MaLT == 2229 || m.MaLT == 2230)).ToList();
+    var listSlider = db.Slides.Where(m => m.Show == true && m.MaLoai == 1006).OrderByDescending(m => m.MaSlide).Take(5).ToList();
+    var listTinTuc = db.Tins.Where(m => m.MaLT == 2064 && m.Show == true).OrderByDescending(m => m.NgayDang).Take(8).ToList();
+    var listDonViLienKet = db.Slides.Where(m => m.Show == true && m.MaLoai == 1007).OrderByDescending(m => m.MaSlide).ToList();
+    int j = 0;
+}
+
+
+<div class="section1">
+    @if (listSlider.Count() > 0)
+    {
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-interval="50000">
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < listSlider.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                    }
+                }
+            </ol>
+            <div class="carousel-inner">
+                @foreach (var item in listSlider)
+                {
+                    if (j == 0)
+                    {
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 img-fluid" src="~/img/ckeditor/Images/@item.AnhSlide">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-fluid" src="~/img/ckeditor/Images/@item.AnhSlide">
+                        </div>
+                    }
+                    j++;
+                }
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    }
+</div>
+
+<div class="section2 padding-top-bottom container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 style="padding-top: 5px; text-transform: uppercase">@db.LoaiTins.Find(2064).TenLT</h4>
+            <div class="row">
+                @if (listTinTuc.Count() > 0)
+                {
+                    foreach (var item in listTinTuc)
+                    {
+                        <div class="col-md-6">
+                            <h6 style="margin-bottom: 0px;margin-top: 10px;">
+                                <a href="/Home2019/Content/@item.MaT">@item.TenT</a>
+                            </h6>
+
+                            <div class="media">
+                                <a class="mr-3 align-self-center" href="/Home2019/Content/@item.MaT">
+                                    <img src="~/img/ckeditor/Images/@item.H" style="height: 70px;">
+                                </a>
+                                <div class="media-body mo-ta-tin-tuc" title="@item.MT">
+                                    @item.MT
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <br />
+                    <a href="~/Home2019/List/2064" class="btn btn-outline-primary btn-sm">Xem tất cả</a>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>
+                THÔNG BÁO
+            </h4>
+            <ul class="list-group">
+                @foreach (var item in listThongTinMoi)
+                {
+                    <li style="text-align:justify" class="list-group-item justify-content-between align-items-center">
+                        <a class="text-dark" href="/Home2019/Content/@item.MaT">@item.TenT</a><br />
+                        <span class="badge badge-dark badge-pill">@string.Format("{0:dd'/'MM'/'yyyy HH':'mm}", item.NgayDang)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        @*<div class="col-md-4">
+                <div class="row">
+                    @foreach (var item in listNhomTin)
+                    {
+                        <div class="col-md-6">
+                            <div class="panel kobo">
+                                <div class="khoimau">
+                                    <a style="text-transform: uppercase !important;" href="~/Home2019/List/@item.MaLT">@item.TenLT</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>*@
+
+    </div>
+</div>
+
+@if (listDonViLienKet.Count() > 0)
+{
+    <div class="sectionLienKetCacKhoa" style="padding-top: 50px; padding-bottom: 70px;">
+        <div class="container">
+            <h4 style="text-align: center;font-weight: 700;margin-bottom: 30px;">LIÊN KẾT</h4><br />
+            <div class="row">
+                <div class="col-md-12 columns">
+                    <div class="owl-carousel owl-theme owl-carousel11111">
+                        @foreach (var item in listDonViLienKet)
+                        {
+                            <div class="item">
+                                <a href="@item.LinkSide">
+                                    <img style="margin-left: auto;margin-right: auto; width: unset" class="img-fluid" src="~/img/ckeditor/Images/@item.AnhSlide">
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/home2019/jquery-3.4.1.min.js"></script>
+
+
+
+<script async>
+    $(document).ready(function () {
+        var classes = ["bg-do", "bg-cam", "bg-xanhdam", "bg-DarkGreen", "bg-tim", "bg-nau", "bg-dc3545", "bg-7aa734"];
+        $('.khoimau').each(function (i, obj) {
+            var idRandom = ~~(Math.random() * classes.length)
+            //console.log(idRandom)
+            $(this).addClass(classes[idRandom]);
+            classes.splice(idRandom, 1);
+
+            //Nếu mảng rỗng thì add lại class
+            if (classes.length < 1) {
+                classes = ["bg-do", "bg-cam", "bg-xanhdam", "bg-DarkGreen", "bg-tim", "bg-nau", "bg-dc3545", "bg-7aa734"];
+            }
+        });
+    });
+
+    $(function () {
+        $('.mo-ta-tin-tuc').succinct({
+            size: 100
+        });
+    });
+
+
+    $(document).ready(function () {
+        var owl = $('.owl-carousel11111');
+        owl.owlCarousel({
+            items: 5,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            center: true
+        });
+    })
+</script>

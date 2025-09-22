@@ -1,0 +1,67 @@
+﻿@model KhoaXayDung.Models.Slide
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Slide</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSlide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhSlide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkSide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkSide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTaSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaSlide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiSlide.TenLoaiSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiSlide.TenLoaiSlide)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSlide }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

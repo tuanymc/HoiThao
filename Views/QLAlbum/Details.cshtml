@@ -1,0 +1,67 @@
+﻿@model KhoaXayDung.Models.AlbumVideoHinhAnh
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AlbumVideoHinhAnh</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenVideoHinhAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenVideoHinhAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Files)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Files)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiAlbum.TenAlbum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiAlbum.TenAlbum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdVideoHinhAnh }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

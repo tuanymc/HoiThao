@@ -1,0 +1,11 @@
+﻿@model IEnumerable<KhoaXayDung.Models.QCLink>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Liên kết website</div>
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a href="@item.Link" target="_blank" class="list-group-item">@item.TenQC</a>
+        }
+    </div>
+</div>

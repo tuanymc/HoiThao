@@ -1,0 +1,21 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+@using KhoaXayDung.Controllers
+<div class="collapse navbar-collapse" id="menu-tintuc">
+    <div class="thongbaox">
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                int nextyear = DateTime.Now.Year + 1;
+                if (item.TenT == "01" && item.NgayDang.Value.Year == DateTime.Now.Year && item.NgayDang.Value.Month == 12)
+                {
+                    <a href="@Url.RouteUrl("CalendarDetail", new {link=item.Link })" class="list-group-item">Tuần @item.TenT - Năm @nextyear</a>
+                }
+                else
+                {
+                    <a href="@Url.RouteUrl("CalendarDetail", new {link=item.Link })" class="list-group-item">Tuần @item.TenT</a>
+                }
+            }
+        </div>
+    </div>
+</div>
+

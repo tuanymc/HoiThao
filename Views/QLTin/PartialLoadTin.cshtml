@@ -1,0 +1,89 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTables">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TenT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LoaiTin.TenLT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NgayDang)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NguoiDung.HT)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoaiTin.TenLT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayDang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NguoiDung.HT)
+                        </td>
+
+                        @if (item.MaLT == 40)
+                        {
+                            <td>
+                                @Html.ActionLink("Cập nhật", "Edit", new { id = item.MaT })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Cập nhật", "Edit", new { id = item.MaT }) |
+                                @Html.ActionLink("Xóa", "Delete", new { id = item.MaT })
+                            </td>
+
+                        }
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables').DataTable({
+                "iDisplayLength": 25,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tất cả"]],
+                responsive: true,
+                "order": [],
+                "language": {
+                    "sProcessing": "Đang xử lý...",
+                    "sLengthMenu": "Xem _MENU_ mục",
+                    "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                    "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                    "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                    "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Tìm:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Đầu",
+                        "sPrevious": "Trước",
+                        "sNext": "Tiếp",
+                        "sLast": "Cuối"
+                    }
+                }
+            });
+        });
+    </script>
+

@@ -1,0 +1,83 @@
+﻿@model KhoaXayDung.Models.LienHe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LienHe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ND)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ND)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThaiXem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThaiXem)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.MaLH }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

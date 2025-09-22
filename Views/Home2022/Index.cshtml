@@ -1,0 +1,20 @@
+﻿@model KhoaXayDung.Models.Page
+@{
+    ViewBag.Title = Model.TenT;
+    Layout = "~/Views/Shared/_Layout2022.cshtml";
+}
+
+<br />
+
+<div class="container-fluid" id="content">
+    @Html.Raw(Model.ND)
+</div>
+<script>
+    $(document).ready(function () {
+        $('#content img').removeAttr('style');
+        $('#content img').addClass('img-center');
+        $('#content img').addClass('img-responsive');
+        $('#content img').addClass('img-fluid');
+    })
+</script>
+

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Slide>
+
+<div class="carousel">
+    <div class="wrapper">
+        <div id="dnn_NewsSlidePane">
+            <div class="DnnModule DnnModule-Banner-Show DnnModule-9325">
+                <a name="9325" tabindex="-1"></a>
+                <div id="dnn_ctr9325_ContentPane">
+                    <!-- Start_Module_9325 -->
+                    <div id="dnn_ctr9325_ModuleContent">
+                        <section>
+                            <div class="homeCarousel">
+                                <div class="bx-wrapper">
+                                    <div style="width: 100%; position: relative;" class="bx-viewport">
+                                        <div class="bx-wrapper">
+                                            <div class="bx-viewport" style="width: 100%; position: relative; ">
+                                                <ul class="bxslider" style="width: auto; position: relative;">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <li style="float: none; list-style: none; position: absolute; width: 1170px; z-index: 0; display: none;" class="bx3 blue bx-clone" id="542">
+                                                            <a tabindex="-1" href="">
+                                                                <img src="~/img/ckeditor/Images/@item.AnhSlide" class="img-responsive img-di-dong" />
+                                                                @if (item.MoTaSlide != null)
+                                                                {
+                                                                    <div class="caption blue">
+                                                                        <div>
+                                                                            @*<h2 style="display: none">@item.TenSlide</h2>*@
+
+                                                                            <p style="display: block">@item.MoTaSlide</p>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="bx-controls bx-has-pager bx-has-controls-auto">
+                                                <div class="bx-controls-auto">
+                                                    <div class="bx-controls-auto-item">
+                                                        <a class="bx-start active" href=""></a>
+                                                    </div>
+                                                    <div class="bx-controls-auto-item">
+                                                        <a class="bx-stop" href=""></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="bx-prev">
+                                    <a href="" tabindex="-1"></a>
+                                </div>
+                                <div class="bx-next">
+                                    <a href="" tabindex="-1"></a>
+                                </div>
+                                <div class="overlay overlayLeft"></div>
+                                <div class="overlay overlayRight"></div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- End_Module_9325 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

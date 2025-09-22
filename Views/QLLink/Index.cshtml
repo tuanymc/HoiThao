@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KhoaXayDung.Models.LinkTuDo>
+
+@{
+    ViewBag.Title = "Quản lý Link tự do";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Quản lý Link tự do</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="dataTables">
+        <thead>
+            <tr>
+                <th>
+                    Tên Link
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Link)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenLink)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Link)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Cập nhật", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>

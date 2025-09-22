@@ -1,0 +1,166 @@
+﻿@model IEnumerable<KhoaXayDung.Models.LoaiTin>
+@using KhoaXayDung.Models
+
+@{
+    ViewBag.Title = "Quản lý loại tin";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<LoaiTin> subMenu(int idcha)
+    {
+        var list = db.LoaiTins.Where(w => w.IDcha == idcha && w.Show == true).ToList();
+        return list;
+    }
+}
+
+<h1>Quản lý loại tin</h1>
+@using (Html.BeginForm("Delete", "QLLoaiTin"))
+{
+    @Html.AntiForgeryToken()
+
+    <p>
+        @Html.ActionLink("Tạo mới", "Create")
+        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </p>
+
+    <div>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Chọn loại tin
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var _menu in Model)
+                            {
+                                if (subMenu(_menu.MaLT).Count() > 0)
+                                {
+                                    <li style="font-weight: 700">
+                                        @_menu.TenLT
+                                        @Html.ActionLink("Cập nhật", "Edit", new { id = _menu.MaLT }, new { style = "color:#b90707" })
+                                    </li>
+                                    <ul>
+                                        @foreach (var _sub in subMenu(_menu.MaLT))
+                                        {
+                                            if (subMenu(_sub.MaLT).Count() > 0)
+                                            {
+                                                <li style="font-weight: 700">
+                                                    @_sub.TenLT
+                                                    @Html.ActionLink("Cập nhật", "Edit", new { id = _sub.MaLT }, new { style = "color:#b90707" })
+                                                </li>
+                                                <ul>
+                                                    @foreach (var _sub1 in subMenu(_sub.MaLT))
+                                                    {
+                                                        <li>
+                                                            <input type="checkbox" name="MaLT" value="@_sub1.MaLT">
+                                                            <label for="age1">@_sub1.TenLT</label>
+                                                            @Html.ActionLink("Cập nhật", "Edit", new { id = _sub1.MaLT }, new { style = "color:#b90707" })
+                                                            <br>
+                                                        </li>
+
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <input type="checkbox" name="MaLT" value="@_sub.MaLT">
+                                                    <label for="age1">@_sub.TenLT</label>
+                                                    @Html.ActionLink("Cập nhật", "Edit", new { id = _sub.MaLT }, new { style = "color:#b90707" })
+                                                    <br>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <input type="checkbox" name="MaLT" value="@_menu.MaLT">
+                                        <label for="age1">@_menu.TenLT</label>
+                                        @Html.ActionLink("Cập nhật", "Edit", new { id = _menu.MaLT }, new { style = "color:#b90707" })
+                                        <br>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@*<div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover" id="dataTables">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TenLT)
+                    </th>
+                    <th>
+                        Danh mục cha
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenLT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoaiTin2.TenLT)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Cập nhật", "Edit", new { id = item.MaLT }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.MaLT })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTables').DataTable({
+            "iDisplayLength": 25,
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tất cả"]],
+            responsive: true,
+            "order": [],
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            }
+        });
+    });
+</script>

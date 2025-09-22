@@ -1,0 +1,138 @@
+﻿@model IEnumerable<KhoaXayDung.Models.ChitietMenu>
+
+@using KhoaXayDung.Models
+@functions {
+        KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+        public List<ChitietMenu> subMenu(int idcha)
+        {
+            var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+            return list;
+        }
+        public string Link(ChitietMenu menu)
+        {
+            string link = "#";
+            if (menu.Page != null)
+            {
+                link = "/news/" + menu.Page.Link.ToString();
+            }
+            if (menu.LoaiTin != null)
+            {
+                link = "/danh-muc/" + menu.LoaiTin.khongdau.ToString();
+            }
+            if (menu.LinkTuDo != null)
+            {
+                link = menu.LinkTuDo.Link.ToString();
+            }
+            return link;
+        }
+        public string MenuName(ChitietMenu menu)
+        {
+            string Menu = "";
+            if (menu.Page != null)
+            {
+                Menu = menu.Page.TenT.ToString();
+            }
+            if (menu.LoaiTin != null)
+            {
+                Menu = menu.LoaiTin.TenLT.ToString();
+            }
+            if (menu.LinkTuDo != null)
+            {
+                Menu = menu.LinkTuDo.TenLink.ToString();
+            }
+            return Menu;
+        }
+
+}
+<style>
+    #accordion .panel .panel-collapse > .list-group .list-group-item:first-child {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    #accordion .panel .panel-collapse > .list-group .list-group-item {
+        border-width: 1px 0;
+    }
+
+    #accordion .panel .panel-collapse > .list-group {
+        margin-bottom: 0;
+    }
+
+    #accordion .panel .panel-collapse .list-group-item {
+        border-radius: 0;
+    }
+
+    #accordion .panel .panel-collapse .list-group .list-group {
+        margin: 0;
+        margin-top: 10px;
+    }
+
+    #accordion .panel .panel-collapse .list-group-item li.list-group-item {
+        margin: 0 -15px;
+        border-top: 1px solid #ddd !important;
+        border-bottom: 0;
+        padding-left: 30px;
+    }
+
+        #accordion .panel .panel-collapse .list-group-item li.list-group-item:last-child {
+            padding-bottom: 0;
+        }
+
+    #accordion .panel .panel-collapse div.list-group div.list-group {
+        margin: 0;
+    }
+
+    #accordion .panel .panel-collapse div.list-group .list-group a.list-group-item {
+        border-top: 1px solid #ddd !important;
+        border-bottom: 0;
+        padding-left: 30px;
+    }
+
+    #accordion .panel .panel-collapse .list-group-item li.list-group-item {
+        border-top: 1px solid #DDD !important;
+    }
+</style>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    @foreach (var _menu in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading@_menu.ID" style="height:51px;">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse@_menu.ID" aria-expanded="true" aria-controls="collapse@_menu.ID">
+                        @MenuName(_menu)
+                    </a>
+                    <button class="btn btn-sm btn-danger" style="float:right!important" onclick="XoaChiTiet('@_menu.ID')">X</button>
+                </h4>
+            </div>
+            @if (subMenu(_menu.ID).Count() > 0)
+            {
+                <div id="collapse@_menu.ID" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading@_menu.ID">
+                    <div class="list-group">
+                        @foreach (var _sub in subMenu(_menu.ID))
+                        {
+                            if (subMenu(_sub.ID).Count() > 0)
+                            {
+                                <a href="#" class="list-group-item" style="height:51px;">@MenuName(_sub) <button class="btn btn-sm btn-danger" style="float:right!important;margin:2px;" onclick="XoaChiTiet('@_sub.ID')">X</button></a>
+                                foreach (var sub2 in subMenu(_sub.ID))
+                                {
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item" style="height:51px;">@MenuName(sub2)<button class="btn btn-sm btn-danger" style="float:right!important;margin:2px;" onclick="XoaChiTiet('@sub2.ID')">X</button></a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <a href="#" class="list-group-item" style="height:51px;">@MenuName(_sub) <button class="btn btn-sm btn-danger" style="float:right!important;margin:2px;" onclick="XoaChiTiet('@_sub.ID')">X</button></a>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

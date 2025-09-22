@@ -1,0 +1,30 @@
+﻿@model IEnumerable<KhoaXayDung.Models.AlbumVideoHinhAnh>
+
+@if (Model.Count() > 0)
+{
+    <div id="dnn_ctr6557_ModuleContent">
+        <div id="dnn_ctr6557_View_ctl00_videos" class="slider1">
+            @foreach (var item in Model)
+            {
+                <div class="slide">
+                    <div class="t5-content">
+                        <div class="h2Avatar">
+                            <a href="/video-hoat-dong/@item.IdVideoHinhAnh">
+                                <img src="~/img/ckeditor/Images/thumb/@item.Files" alt="@item.TenVideoHinhAnh" class="img-responsive"><span class="iconplay">&nbsp; </span>
+                            </a>
+                        </div>
+                        <div class="h2Title">
+                            <h1><a href="/video-hoat-dong/@item.IdVideoHinhAnh">@item.TenVideoHinhAnh</a></h1>
+                            <p>@item.NgayDang</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    Layout = null;
+}
+

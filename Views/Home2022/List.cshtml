@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KhoaXayDung.Models.LayDanhSachTinTucTheoLoai_Result1>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout2022.cshtml";
+
+}
+<br />
+<div class="container">
+    <h1>Tin Tức</h1>
+    @if (Model.Count() > 0)
+    {
+        int i = 0;
+        foreach (var item in Model)
+        {
+            if (i == 0)
+            {
+                @Html.Raw("<div class='row'>");
+            }
+            <div class="col-md-6">
+                <h3><a href="@Url.Action("Detail", "Home2022",  new {id = item.MaT})" style="text-decoration: none">@item.TenT</a></h3>
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <img src="~/img/ckeditor/Images/@item.H" class="img-fluid rounded" style="width: 220px; height: 180px; object-fit: cover;">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <i> <i class="fa fa-clock-o"></i> @item.NgayDang.Value.ToString("dd/MM/yyyy") - <i class="fa fa-eye"></i> @item.Xem</i>
+                        <p style="text-align:justify">@item.MT</p>
+                    </div>
+                </div>
+            </div>
+            i++;
+
+            if (i == 2 || item.Equals(Model.Last()))
+            {
+                @Html.Raw("</div>");
+                i = 0;
+            }
+
+            
+        }
+    }
+</div>

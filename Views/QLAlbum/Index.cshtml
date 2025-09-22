@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KhoaXayDung.Models.AlbumVideoHinhAnh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Quản Lý Album</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tiêu đề
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Ngày đăng
+        </th>
+        <th>
+            Loại album
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th>Chức năng</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenVideoHinhAnh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiAlbum.TenAlbum)
+        </td>
+        <td>
+            <img src="~/img/ckeditor/Images/thumb/@item.Files"/>
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.IdVideoHinhAnh }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.IdVideoHinhAnh }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.IdVideoHinhAnh })
+        </td>
+    </tr>
+}
+
+</table>

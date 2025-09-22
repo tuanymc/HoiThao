@@ -1,0 +1,17 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">THÔNG BÁO SINH VIÊN</div>
+    <div class="panel-body">
+        <div class="mylist">
+            <ul class="list-group">
+                @foreach (var item in Model)
+                {
+                    <li class="list-group-item"><a href="@Url.Action("Index","TinTuc", new { id = item.Link })" title="@Html.DisplayFor(p=>item.Link)">@Html.DisplayFor(p => item.TenT)</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

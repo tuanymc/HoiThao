@@ -1,0 +1,47 @@
+﻿@using KhoaXayDung.Models
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+}
+<nav class="navbar navbar-expand-lg" style="background-color: #ffffff; box-shadow: 0px 0px 24px 0px rgb(0 0 0 / 15%); transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s; padding-bottom: 0px; padding-top: 0px;">
+    <div class="container">
+        <a class="navbar-brand" href="@Url.Action("Index","Home2022", new {id = 3098})">
+            <img class="img-fluid" src="~/img/logo2022.png" style="max-height: 85px" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav menungang">
+                <li class="nav-item">
+                    <a id="tongquanli" class="nav-link" aria-current="page" href="@Url.Action("Index","Home2022", new {id = 3098})">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tongquanli" class="nav-link" href="@Url.Action("Index","Home2022", new {id = 3099})">@db.Pages.Find(3099).TenT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home2022", new {id = 3100})">@db.Pages.Find(3100).TenT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home2022", new {id = 3101})">@db.Pages.Find(3101).TenT</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("List","Home2022", new {id = 2264})">Tin Tức</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home2022", new {id = 3103})">@db.Pages.Find(3103).TenT</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home2022", new {id = 3102})">@db.Pages.Find(3102).TenT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-btn-submit" href="https://easychair.org/conferences?conf=stais2025">
+                        <button type="button" class="btn btn-primary btn-submit">SUBMIT<br />PAPERS</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

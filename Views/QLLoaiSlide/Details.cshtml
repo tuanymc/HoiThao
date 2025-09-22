@@ -1,0 +1,27 @@
+﻿@model KhoaXayDung.Models.LoaiSlide
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoaiSlide</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoaiSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiSlide)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaLoaiSlide }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

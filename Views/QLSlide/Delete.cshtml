@@ -1,0 +1,71 @@
+﻿@model KhoaXayDung.Models.Slide
+
+@{
+    ViewBag.Title = "Xóa slide";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Xóa slide</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSlide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhSlide)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.AnhSlide)*@
+            <img src="~/img/ckeditor/Images/@Model.AnhSlide" style="max-width:500px;"/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkSide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkSide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTaSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaSlide)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiSlide.TenLoaiSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiSlide.TenLoaiSlide)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Danh sách slide", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = @ViewBag.Title;
+    ViewBag.Title1 = @ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutCongNgheSH.cshtml";
+}
+@section VungSlide{
+    <div class="chslide">
+        <div class="container">
+            <div class="col-md-12">
+                @Html.Action("_Slide", "Home")
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-lg-9 col-md9 col-sm-9 col-xs-12 bentrai">
+        @Html.Action("_TinTuc", "Home")
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mnphai">
+        @Html.Action("_MenuPhai", "Home")
+    </div>
+</div>
+@section VungTB{
+    <div class="chvungtb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md9 col-sm-9 col-xs-12">
+                    @Html.Action("_ThongBao", "Home")
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mnphai">
+                    @Html.Action("_ThongKeTruyCapHome", "Home")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        (function ($) {
+            'use strict';
+            $.fn.succinct = function (options) {
+                var settings = $.extend({
+                    size: 240,
+                    omission: ' ...',
+                    ignore: true
+                }, options);
+                return this.each(function () {
+                    var textDefault,
+                        textTruncated,
+                        elements = $(this),
+                        regex = /[!-\/:-@@\[-`{-~]$/,
+                        init = function () {
+                            elements.each(function () {
+                                textDefault = $(this).html();
+                                if (textDefault.length > settings.size) {
+                                    textTruncated = $.trim(textDefault)
+                                                    .substring(0, settings.size)
+                                                    .split(' ')
+                                                    .slice(0, -1)
+                                                    .join(' ');
+                                    if (settings.ignore) {
+                                        textTruncated = textTruncated.replace(regex, '');
+                                    }
+                                    $(this).html(textTruncated + settings.omission);
+                                }
+                            });
+                        };
+                    init();
+                });
+            };
+        })(jQuery);
+        $(".tieude").succinct({
+            size: 150
+        });
+        $(".truncate").succinct({
+            size: 200
+        });
+    });
+</script>

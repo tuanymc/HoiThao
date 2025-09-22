@@ -1,0 +1,53 @@
+﻿@using KhoaXayDung.Models
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    var MenuNgang = db.ChitietMenus.Where(w => w.IdCha == null && w.IdMenu == 3003).OrderBy(o => o.STT).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/danh-muc-thong-bao/" + menu.LoaiTin.khongdau.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+}
+
+<div class="container">
+    <ul class="utilities">
+        @foreach (var _menu in MenuNgang)
+        {
+            <li><a href="@Link(_menu)">@MenuName(_menu)</a></li>
+        }
+    </ul>
+</div>

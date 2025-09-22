@@ -1,0 +1,128 @@
+﻿@using KhoaXayDung.Models;
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    var ttdv = db.Infoes.Find(1);
+
+    var listFooterThongTin = db.ChitietMenus.Where(m => m.IdMenu == 2004).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuThongTin = listFooterThongTin.FirstOrDefault().Menu.TenMenu;
+
+    var listFooterDanhChoNguoiHoc = db.ChitietMenus.Where(m => m.IdMenu == 2005).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuDanhChoNguoiHoc = listFooterDanhChoNguoiHoc.FirstOrDefault().Menu.TenMenu;
+
+    var listFooterDanhChoCVCNV = db.ChitietMenus.Where(m => m.IdMenu == 2006).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuDanhChoCVCNV = listFooterDanhChoCVCNV.FirstOrDefault().Menu.TenMenu;
+}
+
+@functions {
+    @KhoaXayDungEntities db = new KhoaXayDungEntities();
+    public List<ChitietMenu> subMenu(int idcha)
+    {
+        var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+        return list;
+    }
+
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/danh-muc/" + menu.LoaiTin.khongdau.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+}
+
+
+<div id="footer" style="background: #3c3c3c;color: #fff;padding-top: 40px;padding-bottom: 20px;">
+    <div class="top-ft">
+        <div class="container addr">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12 add1a">
+                    <h4>Địa Chỉ</h4>
+                    <div><em class="fa fa-map-marker"></em>&nbsp;@ttdv.DC</div>
+                    <div><em class="fa fa-phone"></em>&nbsp;@ttdv.Phone</div>
+                    <div><em class="fa fa-envelope"></em>&nbsp;@ttdv.Email</div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                    <h4>@ViewBag.MenuThongTin</h4>
+                    <div>
+                        <ul>
+                            @foreach (var item in listFooterThongTin)
+                            {
+                                <li>
+                                    <a href="@Link(item)" target=_self style="color: #fff">
+                                        @MenuName(item)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                    <h4>@ViewBag.MenuDanhChoNguoiHoc</h4>
+                    <div>
+                        <ul>
+                            @foreach (var item in listFooterDanhChoNguoiHoc)
+                            {
+                                <li>
+                                    <a href="@Link(item)" target=_self style="color: #fff">
+                                        @MenuName(item)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                    <h4>@ViewBag.MenuDanhChoCVCNV</h4>
+                    <div>
+                        <ul>
+                            @foreach (var item in listFooterDanhChoCVCNV)
+                            {
+                                <li>
+                                    <a href="@Link(item)" target=_self style="color: #fff">
+                                        @MenuName(item)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-12 text-center">
+                @ttdv.Ten <br />
+                &copy; @DateTime.Today.Year, made with <i class="fa fa-heart heart" style="color:white"></i> by <a title="Trung Tâm CNTT - Trường Đại Học Thủ Dầu Một" href="https://itc.tdmu.edu.vn/">ITC</a>
+            </div>
+        </div>
+    </div>
+</div>

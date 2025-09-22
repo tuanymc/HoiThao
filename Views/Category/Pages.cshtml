@@ -1,0 +1,54 @@
+﻿@model KhoaXayDung.Models.Page
+@{
+    ViewBag.Title =/* @ViewBag.tenlt + " - " +*/ ViewBag.Title;
+    //Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <ol class="breadcrumb" style="margin-right:0;">
+            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li class="active"><span>@ViewBag.Breadcrumb</span></li>
+        </ol>
+        <h1>@Model.TenT</h1>
+        <span>
+            <i class="fa fa-clock-o"></i> @Html.DisplayFor(model => model.NgayDang)  &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-eye"></i> @Model.Xem
+        </span>
+        <div class="noidungbaidang">
+            @Html.Raw(Model.ND)
+        </div>
+        @if (Model.F != null)
+        {
+            <input type="hidden" id="pageCount" value="@ViewBag.pageCount" />
+            <iframe id="myFrame" onload="resizeIframe(this)" class="embed-responsive-item" src="/web/viewer.html?file=/img/ckeditor/Files/@Model.F" style="width:100%;" allowfullscreen webkitallowfullscreen></iframe>
+        }
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        @Html.Action("_MenuPhai", "Home")
+        @Html.Action("_MenuPhai1", "Home")
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('img').removeAttr('style');
+
+        $('img').addClass('img-center');
+        $('img').addClass('img-responsive');
+        if ($("#myFrame").length > 0) {
+            var resInterval = setInterval(function () {
+                if ($("#myFrame").contents().find("#pdfHeight").val() != "") {
+                    var hgt = 0;
+                    hgt = $("#myFrame").contents().find("#pdfHeight").val() * 1;
+                    $("#myFrame").css({ "height": hgt + "px" }).fadeTo('10');
+                }
+            }, 75);
+        }
+    });
+    function resizeIframe(obj) {
+        obj.style.height = $('#pageCount').val() * 1200 + "px";
+    }
+</script>
+
+

@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = @ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutWebSu.cshtml";
+}
+
+@Html.Action("_PartialSlideShow", "TrangChu")
+<h3></h3>
+<div class="col-md-9">
+    <div class="row">
+        @Html.Action("_PartialThongTinDaoTao", "TrangChu")
+        @Html.Action("_PartialThongTinKhoa", "TrangChu")
+        @Html.Action("_PartialHoatDongDoanHoi", "TrangChu")
+    </div>
+
+    <div class="row">
+        @Html.Action("_PartialNCKH", "TrangChu")
+        @Html.Action("_PartialThuVienThongTin", "TrangChu")
+        @Html.Action("_PartialLichCongTac", "TrangChu")
+    </div>
+    <div class="row">
+        @Html.Action("_PartialLienKet", "TrangChu")
+    </div>
+</div>
+<div class="col-md-3 cotmenutt">
+    <p><a class="btn btn-warning btn-lg full" href="@Url.Action("DanhSach", "TinTuc", new { id=30 })" role="button">Thời khóa biểu</a></p>
+    <p><a class="btn btn-danger btn-lg full" href="@Url.Action("DanhSach", "TinTuc", new { id=31 })" role="button">Lịch thi</a></p>
+    <p><a class="btn btn-success btn-lg full" href="@Url.Action("DanhSach", "TinTuc", new { id=29 })" role="button">Biểu mẫu</a></p>
+    <p>
+        <h3 class="chumong">Thống kê truy cập</h3>
+        <i class="fa fa-users"></i>&nbsp;Đang truy cập: @HttpContext.Current.Application["online"].ToString() <br />
+        <i class="glyphicon glyphicon-stats"></i>&nbsp;Tất cả: @HttpContext.Current.Application["visited"].ToString()
+    </p>
+</div>
+

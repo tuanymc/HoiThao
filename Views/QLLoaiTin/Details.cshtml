@@ -1,0 +1,43 @@
+﻿@model KhoaXayDung.Models.LoaiTin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoaiTin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiTin2.TenLT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTin2.TenLT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaLT }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

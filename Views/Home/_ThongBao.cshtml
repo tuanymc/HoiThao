@@ -1,0 +1,18 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+
+<div class="tieudelon">THÔNG BÁO</div>
+<div class="mylist">
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" class="list-group-item">
+                @item.TenT
+                @if ((DateTime.Now - Convert.ToDateTime(item.NgayDang)).Days <= 5)
+                {
+                    <img src="~/img/newlk.gif" />
+                }
+            </a>
+        }
+    </div>
+</div>

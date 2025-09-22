@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = ViewBag.Info + " - Trường Đại Học Thủ Dầu Một";
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+}
+
+@*Slide main*@
+@Html.Action("_Carousel", "Website")
+@*End - Slide main*@
+
+<div class="container box-menu">
+    <div class="rowdiv">
+        <div class="col-xs-5ths">
+            <a href="http://lib.tdmu.edu.vn/" target="_blank" alt="1">
+                <img src="~/Content/images/iconThuVien.png" width="35px" height="35px"> THƯ VIỆN
+            </a>
+        </div>
+        <div class="col-xs-5ths">
+            <a href="https://tdmu.edu.vn/van-bang-chung-chi" target="_self" alt="2"><img src="~/Content/images/document-edit-flat.png" width="35px" height="35px">TRA CỨU VĂN BẰNG</a>
+        </div>
+        <div class="col-xs-5ths">
+            <a href="https://tdmu.edu.vn/don-vi-truc-thuoc/phong-dam-bao-chat-luong" target="_self" alt="3"><img src="~/Content/images/iconKDCLGD.png" width="40px" height="35px">KIỂM ĐỊNH CHẤT LƯỢNG</a>
+        </div>
+        <div class="col-xs-5ths">
+            <a href="https://tdmu.edu.vn/tt09" target="_self" alt="4"><img src="~/Content/images/co-so-vat-chat-hien-dai-icon-44692.png" width="40px" height="35px">CÔNG KHAI CƠ SỞ ĐÀO TẠO</a>
+        </div>
+        <div class="col-xs-5ths">
+            <a href="https://elearning.tdmu.edu.vn/" target="_blank" alt="5"><img src="~/Content/images/e-learning-icon.png" width="35px" height="35px">E-LEARNING</a>
+        </div>
+    </div>
+</div>
+
+<div class="section7" style="padding-top:25px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div id="dnn_MiddleLeftPane">
+                    @*Tin Tức - Sự Kiện*@
+                    @Html.Action("_PartialNews", "Website")
+                    @*End - Tin Tức - Sự Kiện*@
+                </div>
+            </div>
+            @*<div class="col-md-4 col-sm-12 col-xs-12 tbttmain">
+                <div id="dnn_TopLeftPane">
+                    @*Thông Báo*@
+            @*Html.Action("_PartialNotification", "Website")*@
+            @*End - Thông Báo
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+
+@*Liên Kết*@
+@Html.Action("_PartialLinks", "Website")
+@*End - Liên Kết*@
+
+<div class="section7 bgsoc" style="padding-top: 5px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                @*Thông Báo*@
+                @Html.Action("_PartialNotification", "Website")
+                @*End - Thông Báo*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container section7 bgsoc" style="padding-top: 5px;">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                @*Sự Kiện Sắp Diễn Ra*@
+@*Html.Action("_PartialUpcomingEvents", "Website")*@
+@*End - Sự Kiện Sắp Diễn Ra
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@*<div class="section5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @*Cựu sinh viên - kết nối doanh nghiệp - Gốc truyền thống
+                @Html.Action("_PartialStudentEnterpriseTradition", "Website")
+                @*End - Cựu sinh viên - kết nối doanh nghiệp - Gốc truyền thống
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="section2 bgsoc" style="min-height: 530px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div id="dnn_HuongNghiepPane" class="top-sectionbotton huongnghiep">
+                    <div class="DnnModule DnnModule-Tintc-HinthBoxtin DnnModule-9969">
+                        <a name="9969"></a>
+                        <div id="dnn_ctr9969_ContentPane">
+                            @*Hướng Nghiệp*@
+                            @Html.Action("_PartialHuongNghiep", "Website")
+                            @*End - Hướng Nghiệp*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div id="dnn_DoisongsvPane" class="top-sectionbotton dssv">
+                    <div class="DnnModule DnnModule-Tintc-HinthBoxtin DnnModule-9970">
+                        <a name="9970"></a>
+                        <div id="dnn_ctr9970_ContentPane">
+                            @*Hướng Nghiệp*@
+                            @Html.Action("_PartialDoiSongSinhVien", "Website")
+                            @*End - Hướng Nghiệp*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div id="dnn_Footer2Pane">
+                    <div class="DnnModule DnnModule-Tintc-HinthtinPhotoVideos DnnModule-6557">
+                        <a name="6557"></a>
+                        <div class="top-sectionbotton videos">
+                            <i></i>
+                            <h1>
+                                <span id="dnn_ctr6557_TITLE1_titleLabel" class="Head"><a href="/video-hinh-anh-hoat-dong" style="color:white">Videos &amp; Ảnh hoạt động</a></span>
+                            </h1>
+                            <p></p>
+                        </div>
+                        <div id="dnn_ctr6557_ContentPane">
+                            @*Video hoạt động*@
+                            @Html.Action("_PartialVideo", "Website")
+                            @*End - Video hoạt động*@
+                        </div>
+                    </div>
+                    <div class="DnnModule DnnModule-Tintc-HinthtinPhotoVideos DnnModule-9968">
+                        <a name="9968"></a>
+                        <div id="dnn_ctr9968_ContentPane">
+                            @*Hình ảnh hoạt động*@
+                            @Html.Action("_PartialPictures", "Website")
+                            @*End - Hình ảnh hoạt động*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="dnn_FooterBanner">
+                    <div class="DnnModule DnnModule-Banner-Show DnnModule-8402">
+                        <a name="8402"></a>
+                        <h1 class="post-title">
+                            <span id="dnn_ctr8402_TITLE1_titleLabel" class="Head">Các đối tác</span>
+                        </h1>
+                        <div class="post-content">
+                            <div id="dnn_ctr8402_ContentPane">
+                                @*Các đối tác*@
+                                @Html.Action("_PartialDoiTac", "Website")
+                                @*End - Các đối tác*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

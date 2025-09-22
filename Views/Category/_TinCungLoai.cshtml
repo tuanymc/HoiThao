@@ -1,0 +1,14 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+<h1>&nbsp;</h1>
+<div class="tieudelon">BÀI ĐĂNG CÙNG CHỦ ĐỀ</div>
+<div class="mylist">
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" class="list-group-item">
+                @item.TenT
+            </a>
+        }
+    </div>
+</div>
+

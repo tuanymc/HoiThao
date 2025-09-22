@@ -1,0 +1,59 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+@if (Model != null)
+{
+    <div id="w">
+        <h3 style="text-align: center; font-weight: bold; margin: 0px; margin-top: 10px; text-transform: uppercase;">@ViewBag.LoaiTin</h3>
+        <nav class="slidernav">
+            <div id="navbtns" class="clearfix">
+                <a href="#" class="next " id="arrowR">&gt;</a>
+                <a href="#" class="previous " id="arrowL">&lt;</a>
+            </div>
+        </nav>
+        <div class="crsl-items" data-navigation="navbtns" style="width: 100%; overflow: hidden;">
+            <div class="crsl-wrap" style="width: 3492px; margin-left: -582px;">
+                @foreach (var item in Model)
+                {
+                    <div class="crsl-item" style="margin-right: 5px; position: relative; float: left; overflow: hidden; height: 150px; width: 577px;">
+                        <div class="thumbnail">
+                            @if (item.H != null)
+                            {
+                                <img id="dnn_View_ltr5img" class="img-responsive" src="~/img/ckeditor/Images/@item.H?width=273&amp;height=250&amp;mode=crop&amp;anchor=middle">
+                            }
+                            else
+                            {
+                                <img id="dnn_View_ltr5img" class="img-responsive" src="~/Content/images/df.jpg">
+                            }
+                        </div>
+                        <div class="noidungevent">
+                            <h3>
+                                <a title="@item.TenT" class="dsdsa" id="dnn_View_ltr5Title" href="/danh-muc/@item.LoaiTin.khongdau/@item.Link">@item.TenT</a>
+                            </h3>
+                            <p>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i><strong> Thời gian: </strong>
+                                @String.Format("{0:dd/MM/yyyy HH:mm tt}", item.ThoiGianDienRa)
+                            </p>
+                            <p>
+                                <i class="fa fa-map-marker" aria-hidden="true"></i><strong> Địa điểm: </strong>
+                                @item.DiaDiem
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        $('.dsdsa').succinct({
+            size: 120
+        });
+    });
+</script>

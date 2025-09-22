@@ -1,0 +1,40 @@
+﻿@model KhoaXayDung.Models.LoaiTin
+
+@{
+    ViewBag.Title = "Xóa loại tin";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Xóa loại tin</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLT)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LoaiTin2.TenLT)*@ Danh mục cha
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTin2.TenLT)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+           @Html.Raw(ViewBag.thongbao)
+        </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Danh sách loại tin", "Index")
+        </div>
+    }
+</div>

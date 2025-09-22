@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Images";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Images</h2>
+
+<input id="idImages" type="text" disabled />
+
+<span>
+    <a data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-default">
+        Launch Modal
+    </a>
+</span>
+
+<!-- Default bootstrap modal example -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("_Images", "Test")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-action">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal add images -->
+<div class="modal fade" id="myModalAddImages" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-action">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+@*<script>
+        // Fill modal with content from link href
+        $("#myModal").on("show.bs.modal", function (e) {
+            var link = $(e.relatedTarget);
+            $(this).find(".modal-body").load(link.attr("href"));
+        });
+    </script>*@
+
+<script>
+    $('.radiusImages').on('change', function () {
+        var url = $("input[name=optradio]:checked").val();
+        console.log(url)
+        $('#idImages').val(url);
+        // show modal
+        $('#myModal').modal('hide');
+
+    });
+</script>
+
+<script>
+    $('#addImages').on('click', function () {
+
+        //$('#myModal').modal('toggle');
+        //$('#test').css("opacity", "0.2");
+        //$('#myModalAddImages').modal();
+
+        // hide modal images
+        $('#myModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+
+        $('#myModalAddImages').modal('show')
+        //
+
+
+    });
+</script>
+

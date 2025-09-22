@@ -1,0 +1,129 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+@{
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+    int j = 1;
+}
+
+<div id="maincontent">
+    <div class="section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12 breadcrumb">
+                    <ul>
+                        <li><a href="/">Trang Chủ<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li>
+                            <span id="dnn_dnnBreadcrumb_lblBreadCrumb"><a href="#" class="item">@ViewBag.TenLoaiTin</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div id="dnn_ContentPane">
+                        <div class="DnnModule DnnModule-Tintc-Hinthtrangtin DnnModule-2859">
+                            <a name="2859"></a><div id="dnn_ctr2859_ContentPane">
+                                <!-- Start_Module_2859 --><div id="dnn_ctr2859_ModuleContent">
+                                    <div id="list_news">
+                                        @if (Model.Count() > 0)
+                                        {
+                                            <div class='article' style="padding-bottom:10px;">
+                                                <h3>@Model.FirstOrDefault().LoaiTin.TenLT</h3>
+                                                <p class='des'></p>
+                                            </div>
+                                            <div class="list-news">
+                                                <div class='buhlist-article'>
+                                                    @foreach (var item in Model)
+                                                    {
+
+                                                        if (j == 1)
+                                                        {
+                                                            @Html.Raw("<div class='row'>")
+                                                        }
+                                                        <div class='buhlist-item col-md-6 col-sm-12 col-xs-12'>
+                                                            @if (item.H != null)
+                                                            {
+                                                                <div class="buhimgavatar">
+                                                                    <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link">
+                                                                        <img style="height: 100px; width:150px" class="img-responsive list-newss" src="~/img/ckeditor/Images/@item.H" alt="@item.MT" />
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="buhimgavatar">
+                                                                    <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link">
+                                                                        <img style="height: 100px; width:150px" class="img-responsive list-newss" src="~/Content/images/df.jpg" alt="@item.MT" />
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            <div class='buhsummary'>
+                                                                <p class='name'>
+                                                                    <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link">@item.TenT</a>
+                                                                </p>
+                                                                <p class="des mo-ta-tin-tuc" title="@item.MT">@item.MT</p>
+                                                                <p class='date' style="text-align:right">@item.NgayDang</p>
+                                                                <div class="more">
+                                                                    <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" class="button">
+                                                                        Xem thêm
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        { j++; }
+                                                        if (j == 3 || item.Equals(Model.Where(m => m.MaLT == item.MaLT && m.Show == true).Last()))
+                                                        {
+                                                            @Html.Raw("</div>")
+                                                            j = 1;
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div><!-- End_Module_2859 -->
+                            </div>
+                        </div>
+                        <div class="DnnModule DnnModule-Tintc-HinthtinKHC DnnModule-9972">
+                            <a name="9972"></a>
+                            <div id="dnn_ctr9972_ContentPane">
+                                <!-- Start_Module_9972 -->
+                                <div id="dnn_ctr9972_ModuleContent">
+                                </div>
+                                <!-- End_Module_9972 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-3 col-sm-12 col-xs-12">
+                        @*Thông Báo
+                        Html.Action("_PartialNotification", "Website")
+                        End - Thông Báo
+                    </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <div id="dnn_FooterBanner" class="DNNEmptyPane"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        $('.mo-ta-tin-tuc').succinct({
+            size: 200
+        });
+    });
+</script>
+

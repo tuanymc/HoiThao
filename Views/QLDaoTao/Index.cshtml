@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenT)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Xem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Show)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiTin.TenLT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.HT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenT)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Xem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Show)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiTin.TenLT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiDung.HT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaT }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaT }) 
+        </td>
+    </tr>
+}
+
+</table>

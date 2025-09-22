@@ -1,0 +1,32 @@
+﻿@model KhoaXayDung.Models.LoaiSlide
+
+@{
+    ViewBag.Title = "Xóa loại slide";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Xóa loại slide</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoaiSlide)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiSlide)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            @Html.Raw(ViewBag.thongbao)
+        </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Danh sách loại slide", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,97 @@
+﻿@using KhoaXayDung.Models
+
+@{
+    ViewBag.Title = "Danh sách bài đăng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    int idNhom = ViewBag.IdNhom;
+    List<LoaiTin> listLoaiTin = null;
+    listLoaiTin = db.LoaiTins.Where(m => m.IDcha == idNhom).OrderBy(m => m.MaLT).ToList();
+    if (listLoaiTin.Count() < 1)
+    {
+        listLoaiTin = db.LoaiTins.Where(m => m.MaLT == idNhom).OrderBy(m => m.MaLT).ToList();
+    }
+    int id = 0;
+    int j = 0;
+    //List<Tin> lstBaiDangTongHop = new List<Tin>();
+    //foreach (var item in listLoaiTin)
+    //{
+    //    var listBaiDangTemp = db.Tins.Where(m => m.Show == true && m.MaLT == item.MaLT).ToList();
+    //    lstBaiDangTongHop.AddRange(listBaiDangTemp);
+    //}
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@db.LoaiTins.Where(m => m.MaLT == idNhom).FirstOrDefault().TenLT</li>
+                </ol>
+            </nav>
+            <br />
+            <h4 style="text-align:center">DANH SÁCH BÀI ĐĂNG</h4>
+            <br />
+            <div class="tabbable-line">
+                <ul class="nav nav-tabs home-nav">
+                    @foreach (var item in listLoaiTin)
+                    {
+                        if (id == 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active" id="@item.MaLT-tab" data-toggle="tab" href="#baidang_@item.MaLT" role="tab" aria-controls="baidang_@item.MaLT" aria-selected="false">@item.TenLT</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="@item.MaLT-tab" data-toggle="tab" href="#baidang_@item.MaLT" role="tab" aria-controls="baidang_@item.MaLT" aria-selected="false">@item.TenLT</a>
+                            </li>
+                        }
+                        id++;
+                    }
+
+                </ul>
+                <div class="tab-content" style="min-height: 60vh">
+                    @foreach (var item in listLoaiTin)
+                    {
+                        var listBaiDangTheoLoai = db.Tins.Where(m => m.Show == true && m.MaLT == item.MaLT).OrderByDescending(m => m.NgayDang).ToList();
+                        if (j == 0)
+                        {
+                            <div class="tab-pane fade show active" id="baidang_@item.MaLT" role="tabpanel" aria-labelledby="@item.MaLT-tab">
+                                <ul class="list-group">
+                                    @foreach (var itemCon in listBaiDangTheoLoai)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="~/Home2019/Content/@itemCon.MaT">@itemCon.TenT</a>
+                                            <span class="badge badge-primary badge-pill">@string.Format("{0:dd'/'MM'/'yyyy HH':'mm}", itemCon.NgayDang)</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade show" id="baidang_@item.MaLT" role="tabpanel" aria-labelledby="@item.MaLT-tab">
+                                <ul class="list-group">
+                                    @foreach (var itemCon in listBaiDangTheoLoai)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="~/Home2019/Content/@itemCon.MaT">@itemCon.TenT</a>
+                                            <span class="badge badge-primary badge-pill">@string.Format("{0:dd'/'MM'/'yyyy HH':'mm}", itemCon.NgayDang)</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        j++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

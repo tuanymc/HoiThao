@@ -1,0 +1,21 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+<div class="tieudelon">TIN TỨC</div>
+@foreach (var item in Model)
+{
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 new_item">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3 class="new_item_title"><a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" title="@item.TenT">@item.TenT</a></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ct">
+                <img class="img-responsive new_item_img" title="@item.TenT" alt="@item.TenT" src="~/img/ckeditor/Images/@item.H" />
+                <span class="new_item_time"><i class="fa fa-clock-o"></i> @item.NgayDang <i class="fa fa-eye"></i> @item.Xem</span><br />
+                <span class="truncate new_item_desc">@item.MT</span>
+            </div>
+        </div>
+    </div>
+}
+

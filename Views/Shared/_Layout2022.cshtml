@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/png" sizes="32x16" href="~/img/logo2022.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @*<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script>
+        //jQuery('.menungang li:has(a[href="' + window.location.pathname + '"])').find('a').addClass('active');
+        $(document).ready(function () {
+            var navlinks = $('.menungang li').find('a');
+            navlinks.each(function (index, item) {
+                if (item.text == document.title)
+                    $(item).addClass('active');
+                if (document.title == 'List')
+                    if(item.text == 'Tin Tức')
+                        $(item).addClass('active');
+            })
+        })
+    </script>
+
+
+    <style>
+        .navbar-nav .nav-link {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+            .navbar-nav .nav-link.active, .navbar-nav .show > .nav-link {
+                color: #005180;
+                border-bottom: solid;
+                border-bottom-color: #005180;
+                border-bottom-width: 5px;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #005180;
+                border-bottom: solid;
+                border-bottom-color: #005180;
+                border-bottom-width: 5px;
+                transition: .4s all;
+            }
+
+        .nav-link-btn-submit {
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+        }
+
+            .nav-link-btn-submit:hover {
+                border: none !important;
+            }
+
+        .btn-submit {
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 50px;
+            line-height: 1;
+            background: #005180
+        }
+
+        @@media (min-width: 1400px) {
+            .container {
+                max-width: 1350px !important;
+            }
+        }
+
+        @@media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+
+        span {
+            word-break: break-all;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div style="min-height: 90vh">
+        @Html.Action("_Menu")
+        @RenderBody()
+    </div>
+
+    <footer style="background: #fff; text-align: center; box-shadow: 0px 0px 24px 0px rgb(0 0 0 / 15%)">
+        <div class="pt-5 pb-5">
+            <span class="p-1"><a href="@Url.Action("Index","Home2022", new {id = 3098})">Home</a></span>
+            <span class="p-1"><a href="@Url.Action("Index","Home2022", new {id = 3099})">Keynote Speakers</a></span>
+            <span class="p-1"><a href="@Url.Action("Index","Home2022", new {id = 3100})">Call for Papers</a></span>
+            <span class="p-1"><a href="@Url.Action("Index","Home2022", new {id = 3101})">Committee</a></span>
+            <span class="p-1"><a href="@Url.Action("Index","Home2022", new {id = 3102})">Contact</a></span><br />
+            <i>Copyright © @DateTime.Now.Year</i>
+        </div>
+        
+    </footer>
+</body>
+</html>

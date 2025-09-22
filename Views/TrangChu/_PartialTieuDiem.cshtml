@@ -1,0 +1,21 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+@*<div class="row" style="margin:20px 0 0px 0;">*@
+    @*<h1 class="chumong">THÔNG BÁO</h1>*@
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-12 col-sm-4 col-md-4">
+            <div class="thumbnail">
+                <a style="text-decoration:none;" href="@Url.Action("Index", "TinTuc", new { id = item.MaT })">
+                    <img src="~/img/ckeditor/Images/@item.H" alt="...">
+                    <div class="caption">
+                        <h3 class="chumong">@item.TenT</h3>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+    
+@*</div>*@

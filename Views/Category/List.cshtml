@@ -1,0 +1,57 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+@{
+    ViewBag.Title = @ViewBag.tenlt + " - " + ViewBag.Title;
+    //Layout = "~/Views/Shared/_LayoutCongNgheSH.cshtml";
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+}
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 bentrai">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li class="active"><span>@ViewBag.tenlt</span></li>
+        </ol>
+        @if (@ViewBag.malt == 41 || @ViewBag.malt == 49 || @ViewBag.malt == 50)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 new_item">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h3 class="new_item_title"><a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" title="@item.TenT">@item.TenT</a></h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ct">
+                            <img class="img-responsive new_item_img" title="@item.TenT" alt="@item.TenT" src="~/img/ckeditor/Images/@item.H" />
+                            <span class="new_item_time"><i class="fa fa-clock-o"></i>@item.NgayDang <i class="fa fa-eye"></i> @item.Xem</span><br />
+                            <span class="truncate new_item_desc">@item.MT</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="clearfix"></div>
+            <div class="mylist">
+                <div class="list-group">
+                    @foreach (var item in Model)
+                    {
+                        <a href="/danh-muc/@item.LoaiTin.khongdau/@item.Link" class="list-group-item">
+                            @item.TenT
+                            @if ((DateTime.Now - Convert.ToDateTime(item.NgayDang)).Days <= 5)
+                            {
+                                <img src="~/img/newlk.gif" />
+                            }<br />
+                            <i class="small">Ngày đăng: @item.NgayDang &nbsp;&nbsp;&nbsp; <i class="fa fa-eye"></i> @item.Xem</i>
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mnphai">
+        @Html.Action("_MenuPhai", "Home")
+        @Html.Action("_MenuPhai1", "Home")
+    </div>
+</div>

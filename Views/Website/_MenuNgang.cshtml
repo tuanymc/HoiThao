@@ -1,0 +1,126 @@
+﻿@using KhoaXayDung.Models
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    var MenuNgang = db.ChitietMenus.Where(w => w.IdCha == null && w.IdMenu == 3).OrderBy(o => o.STT).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<ChitietMenu> subMenu(int idcha)
+    {
+        var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+        return list;
+    }
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/danh-muc-thong-bao/" + menu.LoaiTin.khongdau.ToString();
+        }
+        if (menu.LoaiTin != null && (menu.IdLoaiTin == 2077 || menu.IdLoaiTin == 2078 || menu.IdLoaiTin == 2097 || menu.IdLoaiTin == 2098 || menu.IdLoaiTin == 2099 || menu.IdLoaiTin == 2100))
+        {
+            link = "/danh-muc-tin-tuc/" + menu.LoaiTin.khongdau.ToString();
+        }
+        //if (menu.LoaiTin != null && menu.IdLoaiTin == 2078)
+        //{
+        //    link = "/danh-muc-tin-tuc/" + menu.LoaiTin.khongdau.ToString();
+        //}
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+}
+
+<ul>
+    <li class="active">
+        <a href="@Url.Action("Index", "Website" )" target=_self>Trang chủ</a>
+    </li>
+    @foreach (var _menu in MenuNgang)
+    {
+        if (subMenu(_menu.ID).Count() > 0)
+        {
+            <li class="sepertor"></li>
+            <li class="has-sub">
+                <a href="">@MenuName(_menu)</a>
+                <ul>
+                    @foreach (var _sub in subMenu(_menu.ID))
+                    {
+                        if (subMenu(_sub.ID).Count() > 0)
+                        {
+                            <li class='has-sub'>
+                                <a href="">@MenuName(_sub)</a>
+                                <ul>
+                                    @foreach (var _sub1 in subMenu(_sub.ID))
+                                    {
+                                        <li><a href="@Link(_sub1)">@MenuName(_sub1)</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="@Link(_sub)">@MenuName(_sub)</a></li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="sepertor"></li>
+            <li><a href="@Link(_menu)">@MenuName(_menu)</a></li>
+        }
+    }
+</ul>
+
+@*<ul>
+        <li class="active">
+            <a href="@Url.Action("Index", "Website" )" target=_self>Trang chủ</a>
+        </li>
+
+        <li class="sepertor"></li>
+
+        <li class="has-sub">
+            <a href="#">Giới Thiệu</a>
+            <ul>
+                <li>
+                    <a href="#">Lời Chào Trưởng Khoa</a>
+                </li>
+                <li>
+                    <a href="#">Tầm Nhìn Và Sứ Mệnh</a>
+                </li>
+                <li>
+                    <a href="#">Hội Đồng Khoa Học Khoa</a>
+                </li>
+                <li>
+                    <a href="#">Thành Tích</a>
+                </li>
+            </ul>
+        </li>
+    </ul>*@
+

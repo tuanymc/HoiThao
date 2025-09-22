@@ -1,0 +1,75 @@
+﻿@model KhoaXayDung.Models.ChitietMenu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChitietMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.STT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CapMenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CapMenu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkTuDo.TenLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkTuDo.TenLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiTin.TenLT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTin.TenLT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Page.TenT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Page.TenT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu.TenMenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menu.TenMenu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

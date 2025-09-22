@@ -1,0 +1,17 @@
+﻿@model KhoaXayDung.Models.Tin
+@if (Model.TenT == "01" && Model.NgayDang.Value.Year == DateTime.Now.Year && Model.NgayDang.Value.Month == 12)
+{
+    int next = DateTime.Now.Year + 1;
+    <h1>Lịch công tác tuần <span id="TenT">@Model.TenT- Năm @next</span></h1>
+}
+else
+{
+    <h1>Lịch công tác tuần <span id="TenT">@Model.TenT</span></h1>
+}
+<span>
+    <i class="fa fa-clock-o"></i> @Html.DisplayFor(model => model.NgayDang)  &nbsp;&nbsp;&nbsp;
+    <i class="fa fa-eye"></i> @Model.Xem
+</span>
+<div class="noidungbaidang">
+    @Html.Raw(Model.ND)
+</div>

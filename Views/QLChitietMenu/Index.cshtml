@@ -1,0 +1,66 @@
+﻿@model IEnumerable<KhoaXayDung.Models.ChitietMenu>
+
+@{
+    ViewBag.Title = "Chi tiết Menu";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Chi tiết Menu</h2>
+
+<p>
+    @Html.ActionLink("Thêm Mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.STT)
+        </th>
+        <th>
+            Menu cha
+        </th>
+
+        <th>
+            Tên link
+        </th>
+        <th>
+            Loại tin
+        </th>
+        <th>
+            Tên tin
+        </th>
+        <th>
+            Loai Menu
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.STT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCha)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkTuDo.TenLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiTin.TenLT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Page.TenT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.TenMenu)
+            </td>
+            <td>
+                @Html.ActionLink("Cập nhật", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

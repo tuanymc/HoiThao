@@ -1,0 +1,106 @@
+﻿@model IEnumerable<KhoaXayDung.Models.LoaiTin>
+@using KhoaXayDung.Models;
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="wrap-history">
+        @foreach (var item in Model)
+        {
+            if (item.MaLT == 2061)
+            {
+                var listNewsStudent = db.Tins.Where(m => m.MaLT == item.MaLT).ToList();
+                <div class="dropdown">
+                    <a href="/dich-vu-tu-van.html" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Content/images/dvtv.png" alt="@item.TenLT">
+                        <strong>@item.TenLT</strong>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        @foreach (var item1 in Model.Where(m => m.IDcha == item.MaLT))
+                        {
+                            var test = item1.Tins.Where(m => m.MaLT == item1.MaLT).Count();
+                            if (test == 0)
+                            {
+                                <li>
+                                    <a href="#">@item1.TenLT</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/danh-muc/@item1.khongdau/@item1.Tins.Where(m => m.MaLT == item1.MaLT).FirstOrDefault().Link">@item1.TenLT</a>
+                                </li>
+                            }
+
+                        }
+                    </ul>
+                </div>
+            }
+            else if (item.MaLT == 2065)
+            {
+                var listNewsStudent = db.Tins.Where(m => m.MaLT == item.MaLT).ToList();
+                <div class="dropdown">
+                    <a href="/dich-vu-tu-van.html" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Content/images/dvtv.png" alt="@item.TenLT">
+                        <strong>@item.TenLT</strong>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        @foreach (var item1 in Model.Where(m => m.IDcha == item.MaLT))
+                        {
+                            var test = item1.Tins.Where(m => m.MaLT == item1.MaLT).Count();
+                            if (test == 0)
+                            {
+                                <li>
+                                    <a href="#">@item1.TenLT</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/danh-muc/@item1.khongdau/@item1.Tins.Where(m => m.MaLT == item1.MaLT).FirstOrDefault().Link">@item1.TenLT</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+            else if (item.MaLT == 2068)
+            {
+                var listNewsStudent = db.Tins.Where(m => m.MaLT == item.MaLT).ToList();
+                <div class="dropdown">
+                    <a href="/dich-vu-tu-van.html" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Content/images/dvtv.png" alt="@item.TenLT">
+                        <strong>@item.TenLT</strong>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        @foreach (var item1 in Model.Where(m => m.IDcha == item.MaLT))
+                        {
+                            var test = item1.Tins.Where(m => m.MaLT == item1.MaLT).Count();
+                            if (test == 0)
+                            {
+                                <li>
+                                    <a href="#">@item1.TenLT</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/danh-muc/@item1.khongdau/@item1.Tins.Where(m => m.MaLT == item1.MaLT).FirstOrDefault().Link">@item1.TenLT</a>
+                                </li>
+                            }
+
+                        }
+
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+}
+else
+{
+    Layout = null;
+}
+

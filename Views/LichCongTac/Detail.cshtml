@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Lịch công tác";
+    Layout = "~/Views/Shared/_LayoutCongNgheSH.cshtml";
+    <style>
+        .icon-bar {
+            background-color: #008000;
+        }
+        .calendar-title{
+            margin-top:0px;
+            margin-bottom:8px;
+        }
+        #menu-tintuc {
+            padding-left:0px;
+            padding-right:0px;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h1 class="calendar-title">
+            LỊCH CÔNG TÁC
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-tintuc">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </h1>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+        @Html.Action("_PartialMenuLich", "LichCongTac")
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+        <ol class="breadcrumb" style="margin-right:0;">
+            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li class="active"><span>Lịch công tác</span></li>
+        </ol>
+
+        @Html.Action("_PartialDetailIndex", "LichCongTac")
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        @Html.Action("_MenuPhai", "Home")
+        @Html.Action("_MenuPhai1", "Home")
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('img').removeAttr('style');
+
+        $('img').addClass('img-center');
+        $('img').addClass('img-responsive');
+        var tenloai = $("#TenT").text();
+        $('#menu-tintuc .list-group-item:contains(' + tenloai + ')').addClass("li active");
+    });
+</script>

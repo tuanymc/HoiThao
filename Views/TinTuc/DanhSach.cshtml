@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+@{
+    ViewBag.Title = @ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+@section TheTieuDe {
+    <ol class="breadcrumb chinhtd">
+        <li><a href="@Url.Action("Index","trangchu")">Trang chủ</a></li>
+        <li><a href="#">@ViewBag.tennhom</a></li>
+        <li class="active">@ViewBag.tenloai</li>
+    </ol>
+}
+<div class="cachle">
+    @foreach (var item in Model)
+    {
+
+
+        <a href="@Url.Action("Index","TinTuc",new { id=item.MaT})"><h3>@Html.DisplayFor(model => item.TenT)</h3></a>
+        <h6>Ngày đăng: @Html.DisplayFor(model => item.NgayDang) | Xem: @Html.DisplayFor(model => item.Xem)</h6>
+
+    }
+</div>
+

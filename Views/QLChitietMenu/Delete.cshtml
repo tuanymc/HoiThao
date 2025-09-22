@@ -1,0 +1,81 @@
+﻿@model KhoaXayDung.Models.ChitietMenu
+
+@{
+    ViewBag.Title = "Xóa chi tiết Menu";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Xóa chi tiết Menu</h2>
+
+<div>
+    <h4>ChitietMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.STT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STT)
+        </dd>
+
+        <dt>
+            Menu Cha
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCha)
+        </dd>
+
+        <dt>
+            Cấp Menu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CapMenu)
+        </dd>
+
+        <dt>
+            Tên Link
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkTuDo.TenLink)
+        </dd>
+
+        <dt>
+            Loại tin
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTin.TenLT)
+        </dd>
+
+        <dt>
+            Trang tin
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Page.TenT)
+        </dd>
+
+        <dt>
+            Menu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menu.TenMenu)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Danh sách menu", "Index")
+        </div>
+    }
+</div>

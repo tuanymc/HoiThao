@@ -1,0 +1,137 @@
+﻿@model KhoaXayDung.Models.LoaiTin
+@using KhoaXayDung.Models
+
+@{
+    ViewBag.Title = "Thêm loại tin";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    var listLoaiTin = db.LoaiTins.Where(m => m.Show == true && m.IDcha == null).ToList();
+}
+
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<LoaiTin> subMenu(int idcha)
+    {
+        var list = db.LoaiTins.Where(w => w.IDcha == idcha && w.Show == true).ToList();
+        return list;
+    }
+}
+
+<h2>Thêm loại tin</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenLT, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.TenLT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenLT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Show, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Show)
+                        @Html.ValidationMessageFor(model => model.Show, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LoaiTin2.TenLT, "Dạnh mục cha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @*@Html.DropDownList("IDcha", null, "Chọn danh mục cha", htmlAttributes: new { @class = "form-control" })*@
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                    Chọn loại tin
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    @foreach (var _menu in listLoaiTin)
+                                    {
+                                        if (subMenu(_menu.MaLT).Count() > 0)
+                                        {
+                                            <li style="font-weight: 700">
+                                                <input type="radio" name="IDcha" value="@_menu.MaLT">
+                                                <label for="age1">@_menu.TenLT</label>
+                                                <br>
+                                            </li>
+                                            <ul>
+                                                @foreach (var _sub in subMenu(_menu.MaLT))
+                                                {
+                                                    if (subMenu(_sub.MaLT).Count() > 0)
+                                                    {
+                                                        @*<li style="font-weight: 700">@_sub.TenLT</li>*@
+                                                        <li style="font-weight: 700">
+                                                            <input type="radio" name="IDcha" value="@_sub.MaLT">
+                                                            <label for="age1">@_sub.TenLT</label>
+                                                            <br>
+                                                        </li>
+                                                        <ul>
+                                                            @foreach (var _sub1 in subMenu(_sub.MaLT))
+                                                            {
+                                                                <li>
+                                                                    <input type="radio" name="IDcha" value="@_sub1.MaLT">
+                                                                    <label for="age1">@_sub1.TenLT</label>
+                                                                    <br>
+                                                                </li>
+
+                                                            }
+                                                        </ul>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <input type="radio" name="IDcha" value="@_sub.MaLT">
+                                                            <label for="age1">@_sub.TenLT</label>
+                                                            <br>
+                                                        </li>
+
+                                                    }
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <input type="radio" name="IDcha" value="@_menu.MaLT">
+                                                <label for="age1">@_menu.TenLT</label>
+                                                <br>
+                                            </li>
+
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.LoaiTin2.TenLT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <input type="submit" value="Thêm" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Danh sách loại tin", "Index")
+</div>

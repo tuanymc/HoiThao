@@ -1,0 +1,101 @@
+﻿@model KhoaXayDung.Models.Tin
+@{
+    ViewBag.Title = @ViewBag.tenlt + " - " + ViewBag.Title;
+    //Layout = "~/Views/Shared/_LayoutCongNgheSH.cshtml";
+    Layout = "~/Views/Shared/_LayoutWebsite2018.cshtml";
+}
+<div id="maincontent">
+    <div class="section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12 breadcrumb">
+                    <ul>
+                        <li>
+                            <a href="/">Trang Chủ<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a style="color:#717171" href="@ViewBag.LinkDanhMuc">@Model.LoaiTin.TenLT <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <span id="dnn_dnnBreadcrumb_lblBreadCrumb"><a href="#" class="item">@Model.TenT</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="maincontent">
+    <div class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div id="dnn_ContentPane">
+                        <div class="DnnModule DnnModule-Tintc-HinthBoxChitittin DnnModule-10001">
+                            <a name="10001"></a>
+                            <div id="dnn_ctr10001_ContentPane">
+                                <!-- Start_Module_10001 -->
+                                <div id="dnn_ctr10001_ModuleContent">
+                                    <div class='article'>
+                                        <h3>@Model.TenT</h3>
+                                        <p class='des'></p>
+                                        <span>
+                                            <i class="fa fa-clock-o"></i> @String.Format("{0:dd/MM/yyyy HH:mm tt}", Html.DisplayFor(model => model.NgayDang))  &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-eye"></i> @Model.Xem
+                                        </span>
+                                        <p class='content'>
+                                            @if (Model.ThoiGianDienRa != null)
+                                            {
+                                                @Html.Raw("- Thời gian diễn ra: " + String.Format("{0:dd/MM/yyyy HH:mm tt}", Model.ThoiGianDienRa))
+                                            }
+                                            <br />
+                                            @if (Model.DiaDiem != null)
+                                            {
+                                                @Html.Raw("- Địa điểm: "+ Model.DiaDiem)
+                                            }
+                                            @Html.Raw(Model.ND)
+                                        </p>
+                                        @if (Model.F != null)
+                                        {
+                                            <input type="hidden" id="pageCount" value="@ViewBag.pageCount" />
+                                            <iframe id="myFrame" onload="resizeIframe(this)" class="embed-responsive-item" src="/web/viewer.html?file=/img/ckeditor/Files/@Model.F" style="width:100%;" allowfullscreen webkitallowfullscreen></iframe>
+                                        }
+                                    </div>
+                                </div>
+                                <!-- End_Module_10001 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('img').removeAttr('style');
+
+        $('img').addClass('img-center');
+        $('img').addClass('img-responsive');
+        if ($("#myFrame").length > 0) {
+            var resInterval = setInterval(function () {
+                if ($("#myFrame").contents().find("#pdfHeight").val() != "") {
+                    var hgt = 0;
+                    hgt = $("#myFrame").contents().find("#pdfHeight").val() * 1;
+                    $("#myFrame").css({ "height": hgt + "px" }).fadeTo('10');
+                }
+            }, 75);
+        }
+    });
+    function resizeIframe(obj) {
+        obj.style.height = $('#pageCount').val() * 1200 + "px";
+    }
+</script>
+<script>
+    var id = $(window).height();
+    $('.article').css('min-height', (id - 300) + 'px');
+</script>
+

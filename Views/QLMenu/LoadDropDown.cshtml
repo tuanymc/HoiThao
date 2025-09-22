@@ -1,0 +1,535 @@
+﻿@model KhoaXayDung.Models.Menu
+@using KhoaXayDung.Models
+@{ 
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    var listLoaiTin = db.LoaiTins.Where(m => m.Show == true && m.IDcha == null).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<LoaiTin> subMenu(int idcha)
+    {
+        var list = db.LoaiTins.Where(w => w.IDcha == idcha && w.Show == true).ToList();
+        return list;
+    }
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Trang tin</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+            <div style="margin-bottom:5px;"><input type="text" class="form-control" id="TenPage_Pages" onkeydown="EnableThemPageButton_Pages(this)" onkeyup="EnableThemPageButton_Pages(this)" placeholder="Nhập tên" required></div>
+            @Html.DropDownList("IDcha", null, "Chọn menu cha", htmlAttributes: new { @class = "form-control", @id = "IdCha_Pages" })
+        </div>
+        <div class="col-md-6">
+            <div style="margin-bottom:5px;"><input type="number" class="form-control" id="ThemSTT_Pages" placeholder="Nhập STT" required></div>
+            <button type="button" id="ThemPageButton_Pages" class="btn btn-sm btn-success" disabled>Thêm Menu</button>
+        </div>
+    </div>
+    <div class="panel-body" style="height:200px;overflow-y:scroll;">
+        <table class="table table-condensed" id="TrangTin">
+            @foreach (var item in (SelectList)ViewBag.IdPage)
+            {
+                <tr>
+                    <th><input type="checkbox" id="checkboxitem" value="@item.Value" name="SelectedTrangTin" onchange="EnableThemMenu_Multi_TrangTin()">  @item.Text</th>
+                    <th>@Html.DropDownList("IDcha", null, "Chọn menu cha", htmlAttributes: new { @class = "form-control", @style = "width:155px;", @id = "TrangTin_IDCha_Multi" + @item.Value })</th>
+                    <th><input type="number" class="form-control" style="width:116px;" id="TrangTin_STT__Multi_@item.Value" placeholder="Nhập STT" required></th>
+                    <th><button type="button" value="@item.Value" onclick="XoaTrangTin('@item.Value')" id="XoaTrangTin" class="btn btn-sm btn-danger">Xóa</button></th>
+                    <th><button type="button" value="@item.Text" class="btn btn-sm btn-primary openDialog" data-toggle="modal" data-id="@item.Value" data-target="#CapNhatTrangTinModal">Sửa</button></th>
+                </tr>
+            }
+        </table>
+
+    </div>
+    <div class="panel-footer"><button type="button" id="ThemMenu_Multi_TrangTin" class="btn btn-sm btn-success" disabled>Thêm Menu</button></div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Link tự do</div>
+    <div class="panel-body">
+        <div class="col-md-6">
+            <div style="margin-bottom:5px;"><input type="text" class="form-control" id="ThemTenLink_Links" onkeydown="EnableThemLinkButton_Links(this)" onkeyup="EnableThemLinkButton_Links(this)" placeholder="Nhập tên" required></div>
+            @Html.DropDownList("IDcha", null, "Chọn menu cha", htmlAttributes: new { @class = "form-control", @id = "IDcha_Links" })
+        </div>
+        <div class="col-md-6">
+            <div style="margin-bottom:5px;"><input type="text" class="form-control" id="ThemLink_Links" placeholder="Nhập Link" required></div>
+            <div style="margin-bottom:5px;"><input type="number" class="form-control" id="ThemSTT_Links" placeholder="Nhập STT" required></div>
+
+
+        </div>
+        <button type="button" id="ThemLinkButton_Links" class="btn btn-sm btn-success" disabled>Thêm Menu</button>
+    </div>
+    <div class="panel-body" style="height:200px;overflow-y:scroll;">
+        <table class="table table-condensed" id="Link_Table">
+            <tbody>
+
+                @foreach (var item in ViewBag.IdLink)
+                {
+                    <tr>
+                        <th><input type="checkbox" id="checkboxitem" value="@item.ID" name="@item.TenLink" onchange="EnableThemMenu_Multi_Link()">@item.TenLink</th>
+                        <th>@Html.DropDownList("IDcha", null, "Chọn menu cha", htmlAttributes: new { @class = "form-control", @style = "width:155px;", @id = "Link_IDCha_Multi" + @item.ID })</th>
+                        <th><input type="number" class="form-control" style="width:116px;" id="Link_STT__Multi_@item.ID" placeholder="Nhập STT" required></th>
+                        <th><button type="button" onclick="Xoalink('@item.ID')" class="btn btn-sm btn-danger">Xóa</button></th>
+                        <th><button type="button" onclick="CapNhatLink('@item.ID','@item.TenLink','@item.Link')" class="btn btn-sm btn-primary" data-toggle="modal" data-id="@item.ID" data-target="#CapNhatLinkModal">Sửa</button></th>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="panel-footer"><button type="button" id="ThemMenu_Multi_Link" class="btn btn-sm btn-success" disabled>Thêm Menu</button></div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Loại Tin</div>
+    <div class="panel-body">
+        <div class="form-group row">
+            <label for="IdLoaiTin" class="control-label col-md-3">Loại Tin:</label>
+            <div class="col-md-9">
+                @*@Html.DropDownList("IdLoaiTin", null, "Chọn loại tin", htmlAttributes: new { @class = "form-control" })*@
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                    Chọn loại tin
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    @foreach (var _menu in listLoaiTin)
+                                    {
+                                        if (subMenu(_menu.MaLT).Count() > 0)
+                                        {
+                                            <li style="font-weight: 700">
+                                                <input type="radio" name="IdLoaiTin" value="@_menu.MaLT">
+                                                <label for="age1">@_menu.TenLT</label>
+                                                <br>
+                                            </li>
+                                            <ul>
+                                                @foreach (var _sub in subMenu(_menu.MaLT))
+                                                {
+                                                    if (subMenu(_sub.MaLT).Count() > 0)
+                                                    {
+                                                        @*<li style="font-weight: 700">@_sub.TenLT</li>*@
+                                                        <li style="font-weight: 700">
+                                                            <input type="radio" name="IdLoaiTin" value="@_sub.MaLT">
+                                                            <label for="age1">@_sub.TenLT</label>
+                                                            <br>
+                                                        </li>
+                                                        <ul>
+                                                            @foreach (var _sub1 in subMenu(_sub.MaLT))
+                                                            {
+                                                                <li>
+                                                                    <input type="radio" name="IdLoaiTin" value="@_sub1.MaLT">
+                                                                    <label for="age1">@_sub1.TenLT</label>
+                                                                    <br>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <input type="radio" name="IdLoaiTin" value="@_sub.MaLT">
+                                                            <label for="age1">@_sub.TenLT</label>
+                                                            <br>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <input type="radio" name="IdLoaiTin" value="@_menu.MaLT">
+                                                <label for="age1">@_menu.TenLT</label>
+                                                <br>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="STT" class="control-label col-md-3">Số thứ Tự</label>
+            <div class="col-md-9">
+                <input type="number" class="form-control" id="STT_LoaiTin" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="IDcha" class="control-label col-md-3">Menu:</label>
+            <div class="col-md-9">
+                @Html.DropDownList("IDcha", null, "Chọn menu cha", htmlAttributes: new { @class = "form-control", @id = "IDcha_LoaiTin" })
+
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="ThemMenu_LoaiTin" value="Thêm Menu" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="CapNhatTrangTinModal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cập Nhật Tin</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="MaTrangTinCapNhat" placeholder="Nhập tên trang tin">
+                <input type="text" class="form-control" id="TenTrangTinCapNhat" placeholder="Nhập tên trang tin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="CapNhatTrangTin" class="btn btn-default">Cập Nhật</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="CapNhatLinkModal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cập Nhật Tin</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="MaLinkCapNhat" placeholder="Nhập tên trang tin">
+                <div class="form-group modal-link">
+                    <input type="text" class="form-control" id="TenLinkTinCapNhat" placeholder="Nhập tên trang tin">
+                </div>
+                <div class="form-group modal-link">
+                    <input type="text" class="form-control" id="LinkTinCapNhat" placeholder="Nhập tên trang tin">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="CapNhatLinkTuDo" class="btn btn-default">Cập Nhật</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function EnableThemPageButton_Pages(x) {
+        if (x.value.length > 0) {
+            $('#ThemPageButton_Pages').prop('disabled', false);
+
+        } else {
+            $('#ThemPageButton_Pages').prop('disabled', true);
+        }
+
+    }
+    function EnableThemLinkButton_Links(x) {
+        if (x.value.length > 0) {
+            $('#ThemLinkButton_Links').prop('disabled', false);
+
+        } else {
+            $('#ThemLinkButton_Links').prop('disabled', true);
+        }
+
+    }
+    function EnableThemMenu_Multi_TrangTin() {
+        checked = $("#TrangTin input[type=checkbox]:checked").length;
+
+        if (!checked) {
+            $('#ThemMenu_Multi_TrangTin').prop('disabled', true);
+
+        } else {
+            $('#ThemMenu_Multi_TrangTin').prop('disabled', false);
+        }
+    }
+    function EnableThemMenu_Multi_Link() {
+        checked = $("#Link_Table input[type=checkbox]:checked").length;
+
+        if (!checked) {
+            $('#ThemMenu_Multi_Link').prop('disabled', true);
+
+        } else {
+            $('#ThemMenu_Multi_Link').prop('disabled', false);
+        }
+    }
+</script>
+<script>
+    $('#CapNhatLinkTuDo').click(function () {
+        var id = $(".modal-body #MaLinkCapNhat").val();
+        var ten = $(".modal-link #TenLinkTinCapNhat").val();
+        var link = $(".modal-link #LinkTinCapNhat").val();
+        $.ajax({
+            type: "POST",
+            url: '/QLMenu/CapNhatLink',
+            data: {
+                'menu': '@Model.ID',
+                'idlink': id,
+                'tenlink': ten,
+                'link': link
+            },
+            success: null,
+            error: function (xhr, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        });
+        $('#CapNhatLinkModal').modal('toggle');
+        LoadMenu('@Model.ID');
+        LoadDropList();
+    });
+    ////////////////////////////////////////////////////
+    function CapNhatLink(id, ten, link) {
+        $(".modal-body #MaLinkCapNhat").val(id);
+        $(".modal-link #TenLinkTinCapNhat").val(ten);
+        $(".modal-link #LinkTinCapNhat").val(link);
+    }
+    ///////////////////////////////////////////////////////////////////
+    function Xoalink(id) {
+        var Id = id;
+        var checkstr = confirm('Bạn có muốn xóa link này ?');
+        if (checkstr == true) {
+            $.ajax({
+                type: "POST",
+                url: '/QLMenu/XoaLink',
+                data: {
+                    'menu': '@Model.ID',
+                    'idlink': Id,
+                },
+                success: null,
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+            LoadMenu('@Model.ID');
+            LoadDropList();
+        } else {
+            return false;
+        }
+        LoadMenu('@Model.ID');
+        LoadDropList();
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    function XoaTrangTin(id) {
+        var Id = id;
+        var checkstr = confirm('Bạn có muốn xóa trang tin này ?');
+        if (checkstr == true) {
+            $.ajax({
+                type: "POST",
+                url: '/QLMenu/XoaPage',
+                data: {
+                    'menu': '@Model.ID',
+                    'idpage': Id,
+                },
+                success: null,
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+            LoadMenu('@Model.ID');
+            LoadDropList();
+        } else {
+            return false;
+        }
+    }
+
+    $(document).on("click", ".openDialog", function () {
+        var Id = $(this).data('id');
+        var TenTin = $(this).val();
+        $(".modal-body #MaTrangTinCapNhat").val(Id);
+        $(".modal-body #TenTrangTinCapNhat").val(TenTin);
+
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#CapNhatTrangTin').click(function () {
+        var Id = $("#MaTrangTinCapNhat").val();
+        var TenTin = $("#TenTrangTinCapNhat").val();
+        $.ajax({
+            type: "POST",
+            url: '/QLMenu/CapNhatPage',
+            data: {
+                'menu': '@Model.ID',
+                'idpage': Id,
+                'tentin': TenTin
+            },
+            success: null,
+            error: function (xhr, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        });
+        $('#CapNhatTrangTinModal').modal('toggle');;
+        LoadMenu('@Model.ID');
+        LoadDropList();
+    });
+
+</script>
+<script>
+    $('#ThemMenu_Multi_Link').click(function () {
+        $('#Link_Table').find('tr').each(function () {
+            var row = $(this);
+            if (row.find('input[type="checkbox"]').is(':checked')) {
+                var id = row.find('input[type="checkbox"]').val();
+                var idmenucha = document.getElementById("Link_IDCha_Multi" + id);
+                var menucha = idmenucha.options[idmenucha.selectedIndex].value;
+                var stt = row.find('input[type="number"]').val()
+                if (stt.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/QLMenu/ThemMenuLinks',
+                        data: {
+                            'idmenu': '@Model.ID',
+                            'malink': id,
+                            'stt': stt,
+                            'idcha': menucha,
+                        },
+                        success: null,
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert(textStatus);
+                        }
+                    });
+                }
+            }
+            LoadMenu('@Model.ID');
+        });
+        LoadMenu('@Model.ID');
+        LoadDropList();
+    });
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#ThemMenu_Multi_TrangTin').click(function () {
+        $('#TrangTin').find('tr').each(function () {
+            var row = $(this);
+            if (row.find('input[type="checkbox"]').is(':checked')) {
+                var id = row.find('input[type="checkbox"]').val();
+                var idmenucha = document.getElementById("TrangTin_IDCha_Multi" + id);
+                var menucha = idmenucha.options[idmenucha.selectedIndex].value;
+                var stt = row.find('input[type="number"]').val()
+                if (stt.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/QLMenu/ThemMenuPages',
+                        data: {
+                            'idmenu': '@Model.ID',
+                            'matin': id,
+                            'stt': stt,
+                            'idcha': menucha,
+                        },
+                        success: null,
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert(textStatus);
+                        }
+                    });
+                }
+            }
+            LoadMenu('@Model.ID');
+        });
+        LoadMenu('@Model.ID');
+        LoadDropList();
+    });
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#ThemMenu_LoaiTin').click(function () {
+
+        //var idloaitin = document.getElementById("IdLoaiTin");
+        //var loaitin = idloaitin.options[idloaitin.selectedIndex].value;
+        var loaitin = $('input[name="IdLoaiTin"]:checked').val();
+
+        var idmenucha = document.getElementById("IDcha_LoaiTin");
+        var menucha = idmenucha.options[idmenucha.selectedIndex].value;
+        if ($('#STT_LoaiTin').val() == '') {
+            alert('Phải nhập số thứ tự');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '/QLMenu/ThemMenuLoaiTins',
+                data: {
+                    'idmenu': '@Model.ID',
+                    'loaitin': loaitin,
+                    'stt': $('#STT_LoaiTin').val(),
+                    'idcha': menucha,
+                },
+                success: function (data) {
+                    $('.alert').show();
+                    LoadMenu('@Model.ID');
+                    LoadDropList();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+        }
+
+    });
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    $('#ThemPageButton_Pages').click(function () {
+        var idmenucha = document.getElementById("IdCha_Pages");
+        var menucha = idmenucha.options[idmenucha.selectedIndex].value;
+        if ($('#ThemSTT_Pages').val().length <= 0 || $('#TenPage_Pages').val().length <= 0) {
+            alert('Phải nhập đầy đủ');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '/QLMenu/ThemPages',
+                data: {
+                    'idmenu': '@Model.ID',
+                    'ten': $('#TenPage_Pages').val(),
+                    'stt': $('#ThemSTT_Pages').val(),
+                    'idcha': menucha,
+                },
+                success: function (data) {
+                    $('.alert').show();
+                    LoadMenu('@Model.ID');
+                    LoadDropList();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+        }
+
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    $('#ThemLinkButton_Links').click(function () {
+        var idmenucha = document.getElementById("IDcha_Links");
+        var menucha = idmenucha.options[idmenucha.selectedIndex].value;
+        if ($('#ThemTenLink_Links').val().length <= 0 || $('#ThemLink_Links').val().length <= 0 || $('#ThemSTT_Links').val().length <= 0) {
+            alert('Phải nhập đầy đủ');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: '/QLMenu/ThemLink',
+                data: {
+                    'idmenu': '@Model.ID',
+                    'ten': $('#ThemTenLink_Links').val(),
+                    'link': $('#ThemLink_Links').val(),
+                    'stt': $('#ThemSTT_Links').val(),
+                    'idcha': menucha,
+                },
+                success: function (data) {
+                    $('.alert').show();
+                    LoadMenu('@Model.ID');
+                    LoadDropList();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+        }
+
+    });
+
+</script>

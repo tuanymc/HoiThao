@@ -1,0 +1,1491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KhoaKinhTeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlbumVideoHinhAnh">
+          <Key>
+            <PropertyRef Name="IdVideoHinhAnh" />
+          </Key>
+          <Property Name="IdVideoHinhAnh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenVideoHinhAnh" Type="nvarchar" MaxLength="200" />
+          <Property Name="Mota" Type="nvarchar" MaxLength="500" />
+          <Property Name="Files" Type="varchar" MaxLength="500" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="IdAlbum" Type="int" />
+          <Property Name="LinkNhung" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="MaCH" />
+          </Key>
+          <Property Name="MaCH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNguoiHoi" Type="nvarchar" MaxLength="100" />
+          <Property Name="ND" Type="ntext" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="TrangThaiXem" Type="bit" />
+          <Property Name="ChoPhepHien" Type="bit" />
+        </EntityType>
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="MaCTL" />
+          </Key>
+          <Property Name="MaCTL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ND" Type="ntext" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="MaCH" Type="int" />
+          <Property Name="MaND" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChitietMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMenu" Type="int" />
+          <Property Name="IdPage" Type="int" />
+          <Property Name="IdLoaiTin" Type="int" />
+          <Property Name="IdLink" Type="int" />
+          <Property Name="STT" Type="int" />
+          <Property Name="IdCha" Type="int" />
+        </EntityType>
+        <EntityType Name="Info">
+          <Key>
+            <PropertyRef Name="Ma" />
+          </Key>
+          <Property Name="Ma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="200" />
+          <Property Name="DC" Type="nvarchar" MaxLength="300" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Mota" Type="nvarchar" MaxLength="500" />
+          <Property Name="Logan" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="MaLH" />
+          </Key>
+          <Property Name="MaLH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="100" />
+          <Property Name="ND" Type="ntext" />
+          <Property Name="DC" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="TrangThaiXem" Type="bit" />
+        </EntityType>
+        <EntityType Name="LienKet">
+          <Key>
+            <PropertyRef Name="MaLK" />
+          </Key>
+          <Property Name="MaLK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLK" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LinkLK" Type="varchar" MaxLength="200" />
+          <Property Name="LogoLK" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Show" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkTuDo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLink" Type="nvarchar" MaxLength="100" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LoaiAlbum">
+          <Key>
+            <PropertyRef Name="IdAlbum" />
+          </Key>
+          <Property Name="IdAlbum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenAlbum" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="LoaiSlide">
+          <Key>
+            <PropertyRef Name="MaLoaiSlide" />
+          </Key>
+          <Property Name="MaLoaiSlide" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiSlide" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoaiTin">
+          <Key>
+            <PropertyRef Name="MaLT" />
+          </Key>
+          <Property Name="MaLT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLT" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="IDcha" Type="int" />
+          <Property Name="khongdau" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenMenu" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="MaND" />
+          </Key>
+          <Property Name="MaND" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HT" Type="nvarchar" MaxLength="100" />
+          <Property Name="MatKhau" Type="char" MaxLength="96" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="GT" Type="bit" />
+          <Property Name="DT" Type="varchar" MaxLength="20" />
+          <Property Name="DC" Type="nvarchar" MaxLength="200" />
+          <Property Name="NS" Type="smalldatetime" />
+          <Property Name="MaQuyen" Type="int" />
+          <Property Name="Show" Type="bit" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="MaT" />
+          </Key>
+          <Property Name="MaT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenT" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="MT" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ND" Type="ntext" />
+          <Property Name="H" Type="nvarchar" MaxLength="500" />
+          <Property Name="F" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="Xem" Type="int" />
+          <Property Name="Link" Type="varchar" MaxLength="500" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="MaND" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="QCLink">
+          <Key>
+            <PropertyRef Name="MaQC" />
+          </Key>
+          <Property Name="MaQC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenQC" Type="nvarchar" MaxLength="200" />
+          <Property Name="Link" Type="varchar" MaxLength="500" />
+          <Property Name="H" Type="nvarchar" MaxLength="200" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="STT" Type="int" />
+          <Property Name="MaND" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Quyen">
+          <Key>
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaQuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenQuyen" Type="nvarchar" MaxLength="100" />
+          <Property Name="Show" Type="bit" />
+        </EntityType>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="MaSlide" />
+          </Key>
+          <Property Name="MaSlide" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaLoai" Type="int" Nullable="false" />
+          <Property Name="TenSlide" Type="nvarchar" MaxLength="500" />
+          <Property Name="AnhSlide" Type="varchar" MaxLength="500" />
+          <Property Name="LinkSide" Type="varchar" MaxLength="500" />
+          <Property Name="MoTaSlide" Type="ntext" />
+          <Property Name="Show" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThongKe">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Visited" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tin">
+          <Key>
+            <PropertyRef Name="MaT" />
+          </Key>
+          <Property Name="MaT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenT" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="MT" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ND" Type="ntext" />
+          <Property Name="H" Type="nvarchar" MaxLength="500" />
+          <Property Name="F" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="Xem" Type="int" />
+          <Property Name="MaLT" Type="int" />
+          <Property Name="Link" Type="varchar" MaxLength="500" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="MaND" Type="varchar" MaxLength="50" />
+          <Property Name="ThoiGianDienRa" Type="datetime" />
+          <Property Name="DiaDiem" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__AlbumVide__IdAlb__5EBF139D">
+          <End Role="LoaiAlbum" Type="Self.LoaiAlbum" Multiplicity="0..1" />
+          <End Role="AlbumVideoHinhAnh" Type="Self.AlbumVideoHinhAnh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiAlbum">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="AlbumVideoHinhAnh">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CauTraLoi__MaCH__24927208">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="0..1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CauTraLoi__MaND__25869641">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="CauTraLoi" Type="Self.CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLin__5FB337D6">
+          <End Role="LinkTuDo" Type="Self.LinkTuDo" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkTuDo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLink" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLin__7C4F7684">
+          <End Role="LinkTuDo" Type="Self.LinkTuDo" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkTuDo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLink" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLoa__60A75C0F">
+          <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLoaiTin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLoa__7D439ABD">
+          <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLoaiTin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdMen__619B8048">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdMen__7E37BEF6">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdPag__628FA481">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="MaT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdPage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdPag__7F2BE32F">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="ChitietMenu" Type="Self.ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="MaT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdPage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoaiTin__IDcha__00200768">
+          <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="0..1" />
+          <End Role="LoaiTin1" Type="Self.LoaiTin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="LoaiTin1">
+              <PropertyRef Name="IDcha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoaiTin__IDcha__6383C8BA">
+          <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="0..1" />
+          <End Role="LoaiTin1" Type="Self.LoaiTin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="LoaiTin1">
+              <PropertyRef Name="IDcha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiDung__MaQuy__276EDEB3">
+          <End Role="Quyen" Type="Self.Quyen" Multiplicity="0..1" />
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quyen">
+              <PropertyRef Name="MaQuyen" />
+            </Principal>
+            <Dependent Role="NguoiDung">
+              <PropertyRef Name="MaQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__MaND__01142BA1">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__MaND__656C112C">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QCLink__MaND__286302EC">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="QCLink" Type="Self.QCLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="QCLink">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Slide__MaLoai__02084FDA">
+          <End Role="LoaiSlide" Type="Self.LoaiSlide" Multiplicity="1" />
+          <End Role="Slide" Type="Self.Slide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSlide">
+              <PropertyRef Name="MaLoaiSlide" />
+            </Principal>
+            <Dependent Role="Slide">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Slide__MaLoai__6754599E">
+          <End Role="LoaiSlide" Type="Self.LoaiSlide" Multiplicity="1" />
+          <End Role="Slide" Type="Self.Slide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSlide">
+              <PropertyRef Name="MaLoaiSlide" />
+            </Principal>
+            <Dependent Role="Slide">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tin__MaLT__29572725">
+          <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="0..1" />
+          <End Role="Tin" Type="Self.Tin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="Tin">
+              <PropertyRef Name="MaLT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tin__MaND__2A4B4B5E">
+          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="0..1" />
+          <End Role="Tin" Type="Self.Tin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Tin">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="LayDanhSachTinTucTheoLoai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idLoai" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="KhoaKinhTeModelStoreContainer">
+          <EntitySet Name="AlbumVideoHinhAnh" EntityType="Self.AlbumVideoHinhAnh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CauTraLoi" EntityType="Self.CauTraLoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChitietMenu" EntityType="Self.ChitietMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Info" EntityType="Self.Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LienHe" EntityType="Self.LienHe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LienKet" EntityType="Self.LienKet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkTuDo" EntityType="Self.LinkTuDo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiAlbum" EntityType="Self.LoaiAlbum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiSlide" EntityType="Self.LoaiSlide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiTin" EntityType="Self.LoaiTin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QCLink" EntityType="Self.QCLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slide" EntityType="Self.Slide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongKe" EntityType="Self.ThongKe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tin" EntityType="Self.Tin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AlbumVide__IdAlb__5EBF139D" Association="Self.FK__AlbumVide__IdAlb__5EBF139D">
+            <End Role="LoaiAlbum" EntitySet="LoaiAlbum" />
+            <End Role="AlbumVideoHinhAnh" EntitySet="AlbumVideoHinhAnh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CauTraLoi__MaCH__24927208" Association="Self.FK__CauTraLoi__MaCH__24927208">
+            <End Role="CauHoi" EntitySet="CauHoi" />
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CauTraLoi__MaND__25869641" Association="Self.FK__CauTraLoi__MaND__25869641">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="CauTraLoi" EntitySet="CauTraLoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLin__5FB337D6" Association="Self.FK__ChitietMe__IdLin__5FB337D6">
+            <End Role="LinkTuDo" EntitySet="LinkTuDo" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLin__7C4F7684" Association="Self.FK__ChitietMe__IdLin__7C4F7684">
+            <End Role="LinkTuDo" EntitySet="LinkTuDo" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLoa__60A75C0F" Association="Self.FK__ChitietMe__IdLoa__60A75C0F">
+            <End Role="LoaiTin" EntitySet="LoaiTin" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLoa__7D439ABD" Association="Self.FK__ChitietMe__IdLoa__7D439ABD">
+            <End Role="LoaiTin" EntitySet="LoaiTin" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdMen__619B8048" Association="Self.FK__ChitietMe__IdMen__619B8048">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdMen__7E37BEF6" Association="Self.FK__ChitietMe__IdMen__7E37BEF6">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdPag__628FA481" Association="Self.FK__ChitietMe__IdPag__628FA481">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdPag__7F2BE32F" Association="Self.FK__ChitietMe__IdPag__7F2BE32F">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoaiTin__IDcha__00200768" Association="Self.FK__LoaiTin__IDcha__00200768">
+            <End Role="LoaiTin" EntitySet="LoaiTin" />
+            <End Role="LoaiTin1" EntitySet="LoaiTin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoaiTin__IDcha__6383C8BA" Association="Self.FK__LoaiTin__IDcha__6383C8BA">
+            <End Role="LoaiTin" EntitySet="LoaiTin" />
+            <End Role="LoaiTin1" EntitySet="LoaiTin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiDung__MaQuy__276EDEB3" Association="Self.FK__NguoiDung__MaQuy__276EDEB3">
+            <End Role="Quyen" EntitySet="Quyen" />
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__MaND__01142BA1" Association="Self.FK__Pages__MaND__01142BA1">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__MaND__656C112C" Association="Self.FK__Pages__MaND__656C112C">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QCLink__MaND__286302EC" Association="Self.FK__QCLink__MaND__286302EC">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="QCLink" EntitySet="QCLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Slide__MaLoai__02084FDA" Association="Self.FK__Slide__MaLoai__02084FDA">
+            <End Role="LoaiSlide" EntitySet="LoaiSlide" />
+            <End Role="Slide" EntitySet="Slide" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Slide__MaLoai__6754599E" Association="Self.FK__Slide__MaLoai__6754599E">
+            <End Role="LoaiSlide" EntitySet="LoaiSlide" />
+            <End Role="Slide" EntitySet="Slide" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tin__MaLT__29572725" Association="Self.FK__Tin__MaLT__29572725">
+            <End Role="LoaiTin" EntitySet="LoaiTin" />
+            <End Role="Tin" EntitySet="Tin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tin__MaND__2A4B4B5E" Association="Self.FK__Tin__MaND__2A4B4B5E">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="Tin" EntitySet="Tin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KhoaKinhTeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KhoaKinhTeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlbumVideoHinhAnhs" EntityType="KhoaKinhTeModel.AlbumVideoHinhAnh" />
+          <EntitySet Name="CauHois" EntityType="KhoaKinhTeModel.CauHoi" />
+          <EntitySet Name="CauTraLois" EntityType="KhoaKinhTeModel.CauTraLoi" />
+          <EntitySet Name="ChitietMenus" EntityType="KhoaKinhTeModel.ChitietMenu" />
+          <EntitySet Name="Infoes" EntityType="KhoaKinhTeModel.Info" />
+          <EntitySet Name="LienHes" EntityType="KhoaKinhTeModel.LienHe" />
+          <EntitySet Name="LienKets" EntityType="KhoaKinhTeModel.LienKet" />
+          <EntitySet Name="LinkTuDoes" EntityType="KhoaKinhTeModel.LinkTuDo" />
+          <EntitySet Name="LoaiAlbums" EntityType="KhoaKinhTeModel.LoaiAlbum" />
+          <EntitySet Name="LoaiSlides" EntityType="KhoaKinhTeModel.LoaiSlide" />
+          <EntitySet Name="LoaiTins" EntityType="KhoaKinhTeModel.LoaiTin" />
+          <EntitySet Name="Menus" EntityType="KhoaKinhTeModel.Menu" />
+          <EntitySet Name="NguoiDungs" EntityType="KhoaKinhTeModel.NguoiDung" />
+          <EntitySet Name="Pages" EntityType="KhoaKinhTeModel.Page" />
+          <EntitySet Name="QCLinks" EntityType="KhoaKinhTeModel.QCLink" />
+          <EntitySet Name="Quyens" EntityType="KhoaKinhTeModel.Quyen" />
+          <EntitySet Name="Slides" EntityType="KhoaKinhTeModel.Slide" />
+          <EntitySet Name="ThongKes" EntityType="KhoaKinhTeModel.ThongKe" />
+          <EntitySet Name="Tins" EntityType="KhoaKinhTeModel.Tin" />
+          <AssociationSet Name="FK__AlbumVide__IdAlb__5EBF139D" Association="KhoaKinhTeModel.FK__AlbumVide__IdAlb__5EBF139D">
+            <End Role="LoaiAlbum" EntitySet="LoaiAlbums" />
+            <End Role="AlbumVideoHinhAnh" EntitySet="AlbumVideoHinhAnhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CauTraLoi__MaCH__24927208" Association="KhoaKinhTeModel.FK__CauTraLoi__MaCH__24927208">
+            <End Role="CauHoi" EntitySet="CauHois" />
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CauTraLoi__MaND__25869641" Association="KhoaKinhTeModel.FK__CauTraLoi__MaND__25869641">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="CauTraLoi" EntitySet="CauTraLois" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLin__5FB337D6" Association="KhoaKinhTeModel.FK__ChitietMe__IdLin__5FB337D6">
+            <End Role="LinkTuDo" EntitySet="LinkTuDoes" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLin__7C4F7684" Association="KhoaKinhTeModel.FK__ChitietMe__IdLin__7C4F7684">
+            <End Role="LinkTuDo" EntitySet="LinkTuDoes" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLoa__60A75C0F" Association="KhoaKinhTeModel.FK__ChitietMe__IdLoa__60A75C0F">
+            <End Role="LoaiTin" EntitySet="LoaiTins" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdLoa__7D439ABD" Association="KhoaKinhTeModel.FK__ChitietMe__IdLoa__7D439ABD">
+            <End Role="LoaiTin" EntitySet="LoaiTins" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdMen__619B8048" Association="KhoaKinhTeModel.FK__ChitietMe__IdMen__619B8048">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdMen__7E37BEF6" Association="KhoaKinhTeModel.FK__ChitietMe__IdMen__7E37BEF6">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdPag__628FA481" Association="KhoaKinhTeModel.FK__ChitietMe__IdPag__628FA481">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChitietMe__IdPag__7F2BE32F" Association="KhoaKinhTeModel.FK__ChitietMe__IdPag__7F2BE32F">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="ChitietMenu" EntitySet="ChitietMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Slide__MaLoai__02084FDA" Association="KhoaKinhTeModel.FK__Slide__MaLoai__02084FDA">
+            <End Role="LoaiSlide" EntitySet="LoaiSlides" />
+            <End Role="Slide" EntitySet="Slides" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Slide__MaLoai__6754599E" Association="KhoaKinhTeModel.FK__Slide__MaLoai__6754599E">
+            <End Role="LoaiSlide" EntitySet="LoaiSlides" />
+            <End Role="Slide" EntitySet="Slides" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoaiTin__IDcha__00200768" Association="KhoaKinhTeModel.FK__LoaiTin__IDcha__00200768">
+            <End Role="LoaiTin" EntitySet="LoaiTins" />
+            <End Role="LoaiTin1" EntitySet="LoaiTins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoaiTin__IDcha__6383C8BA" Association="KhoaKinhTeModel.FK__LoaiTin__IDcha__6383C8BA">
+            <End Role="LoaiTin" EntitySet="LoaiTins" />
+            <End Role="LoaiTin1" EntitySet="LoaiTins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tin__MaLT__29572725" Association="KhoaKinhTeModel.FK__Tin__MaLT__29572725">
+            <End Role="LoaiTin" EntitySet="LoaiTins" />
+            <End Role="Tin" EntitySet="Tins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiDung__MaQuy__276EDEB3" Association="KhoaKinhTeModel.FK__NguoiDung__MaQuy__276EDEB3">
+            <End Role="Quyen" EntitySet="Quyens" />
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__MaND__01142BA1" Association="KhoaKinhTeModel.FK__Pages__MaND__01142BA1">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pages__MaND__656C112C" Association="KhoaKinhTeModel.FK__Pages__MaND__656C112C">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QCLink__MaND__286302EC" Association="KhoaKinhTeModel.FK__QCLink__MaND__286302EC">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="QCLink" EntitySet="QCLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tin__MaND__2A4B4B5E" Association="KhoaKinhTeModel.FK__Tin__MaND__2A4B4B5E">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="Tin" EntitySet="Tins" />
+          </AssociationSet>
+          <FunctionImport Name="LayDanhSachTinTucTheoLoai" ReturnType="Collection(KhoaKinhTeModel.LayDanhSachTinTucTheoLoai_Result1)">
+            <Parameter Name="idLoai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="LayDanhSachTinTucTheoLoai_Result">
+          <Property Type="String" Name="TenT" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="MT" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="H" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayDang" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Xem" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="AlbumVideoHinhAnh">
+          <Key>
+            <PropertyRef Name="IdVideoHinhAnh" />
+          </Key>
+          <Property Name="IdVideoHinhAnh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenVideoHinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mota" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Files" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="IdAlbum" Type="Int32" />
+          <Property Name="LinkNhung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoaiAlbum" Relationship="KhoaKinhTeModel.FK__AlbumVide__IdAlb__5EBF139D" FromRole="AlbumVideoHinhAnh" ToRole="LoaiAlbum" />
+        </EntityType>
+        <EntityType Name="CauHoi">
+          <Key>
+            <PropertyRef Name="MaCH" />
+          </Key>
+          <Property Name="MaCH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNguoiHoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="TrangThaiXem" Type="Boolean" />
+          <Property Name="ChoPhepHien" Type="Boolean" />
+          <NavigationProperty Name="CauTraLois" Relationship="KhoaKinhTeModel.FK__CauTraLoi__MaCH__24927208" FromRole="CauHoi" ToRole="CauTraLoi" />
+        </EntityType>
+        <EntityType Name="CauTraLoi">
+          <Key>
+            <PropertyRef Name="MaCTL" />
+          </Key>
+          <Property Name="MaCTL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="MaCH" Type="Int32" />
+          <Property Name="MaND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CauHoi" Relationship="KhoaKinhTeModel.FK__CauTraLoi__MaCH__24927208" FromRole="CauTraLoi" ToRole="CauHoi" />
+          <NavigationProperty Name="NguoiDung" Relationship="KhoaKinhTeModel.FK__CauTraLoi__MaND__25869641" FromRole="CauTraLoi" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="ChitietMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMenu" Type="Int32" />
+          <Property Name="IdPage" Type="Int32" />
+          <Property Name="IdLoaiTin" Type="Int32" />
+          <Property Name="IdLink" Type="Int32" />
+          <Property Name="STT" Type="Int32" />
+          <Property Name="IdCha" Type="Int32" />
+          <NavigationProperty Name="LinkTuDo" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLin__5FB337D6" FromRole="ChitietMenu" ToRole="LinkTuDo" />
+          <NavigationProperty Name="LinkTuDo1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLin__7C4F7684" FromRole="ChitietMenu" ToRole="LinkTuDo" />
+          <NavigationProperty Name="LoaiTin" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLoa__60A75C0F" FromRole="ChitietMenu" ToRole="LoaiTin" />
+          <NavigationProperty Name="LoaiTin1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLoa__7D439ABD" FromRole="ChitietMenu" ToRole="LoaiTin" />
+          <NavigationProperty Name="Menu" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdMen__619B8048" FromRole="ChitietMenu" ToRole="Menu" />
+          <NavigationProperty Name="Menu1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdMen__7E37BEF6" FromRole="ChitietMenu" ToRole="Menu" />
+          <NavigationProperty Name="Page" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdPag__628FA481" FromRole="ChitietMenu" ToRole="Page" />
+          <NavigationProperty Name="Page1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdPag__7F2BE32F" FromRole="ChitietMenu" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="Info">
+          <Key>
+            <PropertyRef Name="Ma" />
+          </Key>
+          <Property Name="Ma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DC" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mota" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Logan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="MaLH" />
+          </Key>
+          <Property Name="MaLH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="TrangThaiXem" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LienKet">
+          <Key>
+            <PropertyRef Name="MaLK" />
+          </Key>
+          <Property Name="MaLK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLK" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LinkLK" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LogoLK" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Show" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LinkTuDo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChitietMenus" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLin__5FB337D6" FromRole="LinkTuDo" ToRole="ChitietMenu" />
+          <NavigationProperty Name="ChitietMenus1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLin__7C4F7684" FromRole="LinkTuDo" ToRole="ChitietMenu" />
+        </EntityType>
+        <EntityType Name="LoaiAlbum">
+          <Key>
+            <PropertyRef Name="IdAlbum" />
+          </Key>
+          <Property Name="IdAlbum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenAlbum" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AlbumVideoHinhAnhs" Relationship="KhoaKinhTeModel.FK__AlbumVide__IdAlb__5EBF139D" FromRole="LoaiAlbum" ToRole="AlbumVideoHinhAnh" />
+        </EntityType>
+        <EntityType Name="LoaiSlide">
+          <Key>
+            <PropertyRef Name="MaLoaiSlide" />
+          </Key>
+          <Property Name="MaLoaiSlide" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiSlide" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Slides" Relationship="KhoaKinhTeModel.FK__Slide__MaLoai__02084FDA" FromRole="LoaiSlide" ToRole="Slide" />
+          <NavigationProperty Name="Slides1" Relationship="KhoaKinhTeModel.FK__Slide__MaLoai__6754599E" FromRole="LoaiSlide" ToRole="Slide" />
+        </EntityType>
+        <EntityType Name="LoaiTin">
+          <Key>
+            <PropertyRef Name="MaLT" />
+          </Key>
+          <Property Name="MaLT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLT" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="IDcha" Type="Int32" />
+          <Property Name="khongdau" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChitietMenus" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLoa__60A75C0F" FromRole="LoaiTin" ToRole="ChitietMenu" />
+          <NavigationProperty Name="ChitietMenus1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdLoa__7D439ABD" FromRole="LoaiTin" ToRole="ChitietMenu" />
+          <NavigationProperty Name="LoaiTin1" Relationship="KhoaKinhTeModel.FK__LoaiTin__IDcha__00200768" FromRole="LoaiTin" ToRole="LoaiTin1" />
+          <NavigationProperty Name="LoaiTin2" Relationship="KhoaKinhTeModel.FK__LoaiTin__IDcha__00200768" FromRole="LoaiTin1" ToRole="LoaiTin" />
+          <NavigationProperty Name="LoaiTin11" Relationship="KhoaKinhTeModel.FK__LoaiTin__IDcha__6383C8BA" FromRole="LoaiTin" ToRole="LoaiTin1" />
+          <NavigationProperty Name="LoaiTin3" Relationship="KhoaKinhTeModel.FK__LoaiTin__IDcha__6383C8BA" FromRole="LoaiTin1" ToRole="LoaiTin" />
+          <NavigationProperty Name="Tins" Relationship="KhoaKinhTeModel.FK__Tin__MaLT__29572725" FromRole="LoaiTin" ToRole="Tin" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenMenu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChitietMenus" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdMen__619B8048" FromRole="Menu" ToRole="ChitietMenu" />
+          <NavigationProperty Name="ChitietMenus1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdMen__7E37BEF6" FromRole="Menu" ToRole="ChitietMenu" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="MaND" />
+          </Key>
+          <Property Name="MaND" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="96" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GT" Type="Boolean" />
+          <Property Name="DT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NS" Type="DateTime" Precision="0" />
+          <Property Name="MaQuyen" Type="Int32" />
+          <Property Name="Show" Type="Boolean" />
+          <NavigationProperty Name="CauTraLois" Relationship="KhoaKinhTeModel.FK__CauTraLoi__MaND__25869641" FromRole="NguoiDung" ToRole="CauTraLoi" />
+          <NavigationProperty Name="Quyen" Relationship="KhoaKinhTeModel.FK__NguoiDung__MaQuy__276EDEB3" FromRole="NguoiDung" ToRole="Quyen" />
+          <NavigationProperty Name="Pages" Relationship="KhoaKinhTeModel.FK__Pages__MaND__01142BA1" FromRole="NguoiDung" ToRole="Page" />
+          <NavigationProperty Name="Pages1" Relationship="KhoaKinhTeModel.FK__Pages__MaND__656C112C" FromRole="NguoiDung" ToRole="Page" />
+          <NavigationProperty Name="QCLinks" Relationship="KhoaKinhTeModel.FK__QCLink__MaND__286302EC" FromRole="NguoiDung" ToRole="QCLink" />
+          <NavigationProperty Name="Tins" Relationship="KhoaKinhTeModel.FK__Tin__MaND__2A4B4B5E" FromRole="NguoiDung" ToRole="Tin" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="MaT" />
+          </Key>
+          <Property Name="MaT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenT" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MT" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="H" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="F" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="Xem" Type="Int32" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="MaND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChitietMenus" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdPag__628FA481" FromRole="Page" ToRole="ChitietMenu" />
+          <NavigationProperty Name="ChitietMenus1" Relationship="KhoaKinhTeModel.FK__ChitietMe__IdPag__7F2BE32F" FromRole="Page" ToRole="ChitietMenu" />
+          <NavigationProperty Name="NguoiDung" Relationship="KhoaKinhTeModel.FK__Pages__MaND__01142BA1" FromRole="Page" ToRole="NguoiDung" />
+          <NavigationProperty Name="NguoiDung1" Relationship="KhoaKinhTeModel.FK__Pages__MaND__656C112C" FromRole="Page" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="QCLink">
+          <Key>
+            <PropertyRef Name="MaQC" />
+          </Key>
+          <Property Name="MaQC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenQC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="H" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="STT" Type="Int32" />
+          <Property Name="MaND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NguoiDung" Relationship="KhoaKinhTeModel.FK__QCLink__MaND__286302EC" FromRole="QCLink" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="Quyen">
+          <Key>
+            <PropertyRef Name="MaQuyen" />
+          </Key>
+          <Property Name="MaQuyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenQuyen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Show" Type="Boolean" />
+          <NavigationProperty Name="NguoiDungs" Relationship="KhoaKinhTeModel.FK__NguoiDung__MaQuy__276EDEB3" FromRole="Quyen" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="MaSlide" />
+          </Key>
+          <Property Name="MaSlide" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaLoai" Type="Int32" Nullable="false" />
+          <Property Name="TenSlide" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AnhSlide" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LinkSide" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MoTaSlide" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Show" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LoaiSlide" Relationship="KhoaKinhTeModel.FK__Slide__MaLoai__02084FDA" FromRole="Slide" ToRole="LoaiSlide" />
+          <NavigationProperty Name="LoaiSlide1" Relationship="KhoaKinhTeModel.FK__Slide__MaLoai__6754599E" FromRole="Slide" ToRole="LoaiSlide" />
+        </EntityType>
+        <EntityType Name="ThongKe">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Visited" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tin">
+          <Key>
+            <PropertyRef Name="MaT" />
+          </Key>
+          <Property Name="MaT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenT" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MT" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="H" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="F" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="Xem" Type="Int32" />
+          <Property Name="MaLT" Type="Int32" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="MaND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ThoiGianDienRa" Type="DateTime" Precision="3" />
+          <Property Name="DiaDiem" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoaiTin" Relationship="KhoaKinhTeModel.FK__Tin__MaLT__29572725" FromRole="Tin" ToRole="LoaiTin" />
+          <NavigationProperty Name="NguoiDung" Relationship="KhoaKinhTeModel.FK__Tin__MaND__2A4B4B5E" FromRole="Tin" ToRole="NguoiDung" />
+        </EntityType>
+        <Association Name="FK__AlbumVide__IdAlb__5EBF139D">
+          <End Type="KhoaKinhTeModel.LoaiAlbum" Role="LoaiAlbum" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.AlbumVideoHinhAnh" Role="AlbumVideoHinhAnh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiAlbum">
+              <PropertyRef Name="IdAlbum" />
+            </Principal>
+            <Dependent Role="AlbumVideoHinhAnh">
+              <PropertyRef Name="IdAlbum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CauTraLoi__MaCH__24927208">
+          <End Type="KhoaKinhTeModel.CauHoi" Role="CauHoi" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.CauTraLoi" Role="CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CauTraLoi__MaND__25869641">
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.CauTraLoi" Role="CauTraLoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="CauTraLoi">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLin__5FB337D6">
+          <End Type="KhoaKinhTeModel.LinkTuDo" Role="LinkTuDo" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkTuDo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLink" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLin__7C4F7684">
+          <End Type="KhoaKinhTeModel.LinkTuDo" Role="LinkTuDo" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinkTuDo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLink" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLoa__60A75C0F">
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLoaiTin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdLoa__7D439ABD">
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdLoaiTin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdMen__619B8048">
+          <End Type="KhoaKinhTeModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdMen__7E37BEF6">
+          <End Type="KhoaKinhTeModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdPag__628FA481">
+          <End Type="KhoaKinhTeModel.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="MaT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdPage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChitietMe__IdPag__7F2BE32F">
+          <End Type="KhoaKinhTeModel.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.ChitietMenu" Role="ChitietMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="MaT" />
+            </Principal>
+            <Dependent Role="ChitietMenu">
+              <PropertyRef Name="IdPage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Slide__MaLoai__02084FDA">
+          <End Type="KhoaKinhTeModel.LoaiSlide" Role="LoaiSlide" Multiplicity="1" />
+          <End Type="KhoaKinhTeModel.Slide" Role="Slide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSlide">
+              <PropertyRef Name="MaLoaiSlide" />
+            </Principal>
+            <Dependent Role="Slide">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Slide__MaLoai__6754599E">
+          <End Type="KhoaKinhTeModel.LoaiSlide" Role="LoaiSlide" Multiplicity="1" />
+          <End Type="KhoaKinhTeModel.Slide" Role="Slide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSlide">
+              <PropertyRef Name="MaLoaiSlide" />
+            </Principal>
+            <Dependent Role="Slide">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoaiTin__IDcha__00200768">
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="LoaiTin1">
+              <PropertyRef Name="IDcha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoaiTin__IDcha__6383C8BA">
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="LoaiTin1">
+              <PropertyRef Name="IDcha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tin__MaLT__29572725">
+          <End Type="KhoaKinhTeModel.LoaiTin" Role="LoaiTin" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.Tin" Role="Tin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTin">
+              <PropertyRef Name="MaLT" />
+            </Principal>
+            <Dependent Role="Tin">
+              <PropertyRef Name="MaLT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiDung__MaQuy__276EDEB3">
+          <End Type="KhoaKinhTeModel.Quyen" Role="Quyen" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quyen">
+              <PropertyRef Name="MaQuyen" />
+            </Principal>
+            <Dependent Role="NguoiDung">
+              <PropertyRef Name="MaQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__MaND__01142BA1">
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pages__MaND__656C112C">
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QCLink__MaND__286302EC">
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.QCLink" Role="QCLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="QCLink">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tin__MaND__2A4B4B5E">
+          <End Type="KhoaKinhTeModel.NguoiDung" Role="NguoiDung" Multiplicity="0..1" />
+          <End Type="KhoaKinhTeModel.Tin" Role="Tin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="MaND" />
+            </Principal>
+            <Dependent Role="Tin">
+              <PropertyRef Name="MaND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="LayDanhSachTinTucTheoLoai_Result1">
+          <Property Type="String" Name="TenT" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="MT" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="H" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="NgayDang" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Xem" Nullable="true" />
+          <Property Type="Int32" Name="MaT" Nullable="false" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KhoaKinhTeModelStoreContainer" CdmEntityContainer="KhoaKinhTeEntities">
+          <EntitySetMapping Name="AlbumVideoHinhAnhs">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.AlbumVideoHinhAnh">
+              <MappingFragment StoreEntitySet="AlbumVideoHinhAnh">
+                <ScalarProperty Name="LinkNhung" ColumnName="LinkNhung" />
+                <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="Files" ColumnName="Files" />
+                <ScalarProperty Name="Mota" ColumnName="Mota" />
+                <ScalarProperty Name="TenVideoHinhAnh" ColumnName="TenVideoHinhAnh" />
+                <ScalarProperty Name="IdVideoHinhAnh" ColumnName="IdVideoHinhAnh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CauHois">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.CauHoi">
+              <MappingFragment StoreEntitySet="CauHoi">
+                <ScalarProperty Name="ChoPhepHien" ColumnName="ChoPhepHien" />
+                <ScalarProperty Name="TrangThaiXem" ColumnName="TrangThaiXem" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="TenNguoiHoi" ColumnName="TenNguoiHoi" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CauTraLois">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.CauTraLoi">
+              <MappingFragment StoreEntitySet="CauTraLoi">
+                <ScalarProperty Name="MaND" ColumnName="MaND" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChitietMenus">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.ChitietMenu">
+              <MappingFragment StoreEntitySet="ChitietMenu">
+                <ScalarProperty Name="IdCha" ColumnName="IdCha" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="IdLink" ColumnName="IdLink" />
+                <ScalarProperty Name="IdLoaiTin" ColumnName="IdLoaiTin" />
+                <ScalarProperty Name="IdPage" ColumnName="IdPage" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Infoes">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Info">
+              <MappingFragment StoreEntitySet="Info">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Logan" ColumnName="Logan" />
+                <ScalarProperty Name="Mota" ColumnName="Mota" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ma" ColumnName="Ma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LienHes">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LienHe">
+              <MappingFragment StoreEntitySet="LienHe">
+                <ScalarProperty Name="TrangThaiXem" ColumnName="TrangThaiXem" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaLH" ColumnName="MaLH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LienKets">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LienKet">
+              <MappingFragment StoreEntitySet="LienKet">
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="LogoLK" ColumnName="LogoLK" />
+                <ScalarProperty Name="LinkLK" ColumnName="LinkLK" />
+                <ScalarProperty Name="TenLK" ColumnName="TenLK" />
+                <ScalarProperty Name="MaLK" ColumnName="MaLK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkTuDoes">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LinkTuDo">
+              <MappingFragment StoreEntitySet="LinkTuDo">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="TenLink" ColumnName="TenLink" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiAlbums">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LoaiAlbum">
+              <MappingFragment StoreEntitySet="LoaiAlbum">
+                <ScalarProperty Name="TenAlbum" ColumnName="TenAlbum" />
+                <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiSlides">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LoaiSlide">
+              <MappingFragment StoreEntitySet="LoaiSlide">
+                <ScalarProperty Name="TenLoaiSlide" ColumnName="TenLoaiSlide" />
+                <ScalarProperty Name="MaLoaiSlide" ColumnName="MaLoaiSlide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiTins">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.LoaiTin">
+              <MappingFragment StoreEntitySet="LoaiTin">
+                <ScalarProperty Name="khongdau" ColumnName="khongdau" />
+                <ScalarProperty Name="IDcha" ColumnName="IDcha" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="TenLT" ColumnName="TenLT" />
+                <ScalarProperty Name="MaLT" ColumnName="MaLT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="TenMenu" ColumnName="TenMenu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiDungs">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.NguoiDung">
+              <MappingFragment StoreEntitySet="NguoiDung">
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+                <ScalarProperty Name="NS" ColumnName="NS" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="DT" ColumnName="DT" />
+                <ScalarProperty Name="GT" ColumnName="GT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="HT" ColumnName="HT" />
+                <ScalarProperty Name="MaND" ColumnName="MaND" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="MaND" ColumnName="MaND" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Xem" ColumnName="Xem" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="MT" ColumnName="MT" />
+                <ScalarProperty Name="TenT" ColumnName="TenT" />
+                <ScalarProperty Name="MaT" ColumnName="MaT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QCLinks">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.QCLink">
+              <MappingFragment StoreEntitySet="QCLink">
+                <ScalarProperty Name="MaND" ColumnName="MaND" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="TenQC" ColumnName="TenQC" />
+                <ScalarProperty Name="MaQC" ColumnName="MaQC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quyens">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Quyen">
+              <MappingFragment StoreEntitySet="Quyen">
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slides">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Slide">
+              <MappingFragment StoreEntitySet="Slide">
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="MoTaSlide" ColumnName="MoTaSlide" />
+                <ScalarProperty Name="LinkSide" ColumnName="LinkSide" />
+                <ScalarProperty Name="AnhSlide" ColumnName="AnhSlide" />
+                <ScalarProperty Name="TenSlide" ColumnName="TenSlide" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="MaSlide" ColumnName="MaSlide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongKes">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.ThongKe">
+              <MappingFragment StoreEntitySet="ThongKe">
+                <ScalarProperty Name="Visited" ColumnName="Visited" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tins">
+            <EntityTypeMapping TypeName="KhoaKinhTeModel.Tin">
+              <MappingFragment StoreEntitySet="Tin">
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+                <ScalarProperty Name="ThoiGianDienRa" ColumnName="ThoiGianDienRa" />
+                <ScalarProperty Name="MaND" ColumnName="MaND" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="MaLT" ColumnName="MaLT" />
+                <ScalarProperty Name="Xem" ColumnName="Xem" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="F" ColumnName="F" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="MT" ColumnName="MT" />
+                <ScalarProperty Name="TenT" ColumnName="TenT" />
+                <ScalarProperty Name="MaT" ColumnName="MaT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachTinTucTheoLoai" FunctionName="KhoaKinhTeModel.Store.LayDanhSachTinTucTheoLoai">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KhoaKinhTeModel.LayDanhSachTinTucTheoLoai_Result1">
+                <ScalarProperty Name="TenT" ColumnName="TenT" />
+                <ScalarProperty Name="MT" ColumnName="MT" />
+                <ScalarProperty Name="H" ColumnName="H" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="Xem" ColumnName="Xem" />
+                <ScalarProperty Name="MaT" ColumnName="MaT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

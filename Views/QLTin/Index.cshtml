@@ -1,0 +1,157 @@
+﻿@using KhoaXayDung.Models
+@{
+    ViewBag.Title = "Danh sách bài đăng";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    var listLoaiTin = db.LoaiTins.Where(m => m.Show == true && m.IDcha == null).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<LoaiTin> subMenu(int idcha)
+    {
+        var list = db.LoaiTins.Where(w => w.IDcha == idcha && w.Show == true).ToList();
+        return list;
+    }
+}
+
+<h2>Quản lý bài đăng</h2>
+
+<p>
+    @if (ViewBag.LoaiTin == 0)
+    {
+        @Html.ActionLink("Tạo mới", "Create")
+    }
+    else
+    {
+        @Html.ActionLink("Tạo mới", "Create", new { id = ViewBag.LoaiTin })
+    }
+</p>
+<div class="form-group">
+    <label class="control-label col-md-2">@*Loại tin*@</label>
+    <div class="col-md-6">
+        @*@Html.DropDownList("MaLT", null, "Chọn loại tin", htmlAttributes: new { @class = "form-control" })*@
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Chọn loại tin
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (var _menu in listLoaiTin)
+                            {
+                                if (subMenu(_menu.MaLT).Count() > 0)
+                                {
+                                    <li style="font-weight: 700">@_menu.TenLT</li>
+                                    <ul>
+                                        @foreach (var _sub in subMenu(_menu.MaLT))
+                                        {
+                                            if (subMenu(_sub.MaLT).Count() > 0)
+                                            {
+                                                <li style="font-weight: 700">@_sub.TenLT</li>
+                                                <ul>
+                                                    @foreach (var _sub1 in subMenu(_sub.MaLT))
+                                                    {
+                                                        <li>
+                                                            @*<input type="radio" name="MaLT" value="@_sub1.MaLT">*@
+                                                            <label for="age1">@_sub1.TenLT</label>
+                                                            <span>@Html.ActionLink("Xem danh sách bài đăng", "Index", new { id = _sub1.MaLT }, new { style = "color:#2342b3" })</span>
+                                                            <br>
+                                                        </li>
+
+                                                    }
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    @*<input type="radio" name="MaLT" value="@_sub.MaLT">*@
+                                                    <label for="age1">@_sub.TenLT</label>
+                                                    @Html.ActionLink("Xem danh sách bài đăng", "Index", new { id = _sub.MaLT }, new { style = "color:#2342b3" })
+                                                    <br>
+                                                </li>
+
+                                            }
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @*<input type="radio" name="MaLT" value="@_menu.MaLT">*@
+                                        <label for="age1">@_menu.TenLT</label>
+                                        @Html.ActionLink("Xem danh sách bài đăng", "Index", new { id = _menu.MaLT }, new { style = "color:#2342b3" })
+                                        <br>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.Action("PartialLoadTin")
+</div>
+@*<div id="loadContent">
+
+    </div>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        Change();
+        //$("#MaLT").change(function () {
+        //    Change();
+        //})
+
+        $(function () {
+            $('input[type="radio"]').click(function () {
+                if ($(this).is(':checked')) {
+                    Change();
+                }
+            });
+        });
+
+
+    })
+    function Change() {
+        var id = $("#MaLT").val();
+        console.log(id)
+        if (id != "") {
+            LoadTin(id);
+        }
+        else {
+            $('#loadContent').html(null);
+        }
+    }
+    function LoadTin(id) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("PartialLoadTin", "QLTin")',
+            contenType: 'application/JSON; charset=utf-8',
+            data: { id: id },
+            dataType: 'html',
+            beforeSend: function () {
+                $('#loadContent').html(null);
+            },
+            complete: function () {
+
+            }
+        }).success(function (result) {
+            $('#loadContent').html(result);
+        }).error(function () {
+
+        });
+    }
+</script>
+

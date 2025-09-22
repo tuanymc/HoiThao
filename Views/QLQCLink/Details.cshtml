@@ -1,0 +1,70 @@
+﻿@model KhoaXayDung.Models.QCLink
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QCLink</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenQC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenQC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.H)
+        </dt>
+
+        <dd>
+            @if(Model.H!=null)
+            { 
+                <img src="~/img/ckeditor/Images/@Html.DisplayFor(model => model.H)" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung.HT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung.HT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaQC }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

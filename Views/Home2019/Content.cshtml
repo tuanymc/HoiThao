@@ -1,0 +1,73 @@
+﻿@model KhoaXayDung.Models.Tin
+@using KhoaXayDung.Models
+@{
+    ViewBag.Title = "Chi tiết bài đăng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    //var getIdNhom = db.LoaiTins.Where(m => m.MaLT == Model.LoaiTin.MaLT).FirstOrDefault();
+
+    List<LoaiTin> getIdLoaiTin = null;
+    getIdLoaiTin = db.LoaiTins.Where(m => m.IDcha == Model.LoaiTin.MaLT).OrderBy(m => m.MaLT).ToList();
+    if (getIdLoaiTin.Count() < 1)
+    {
+        getIdLoaiTin = db.LoaiTins.Where(m => m.MaLT == Model.LoaiTin.MaLT).OrderBy(m => m.MaLT).ToList();
+    }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/Home2019/List/@getIdLoaiTin.FirstOrDefault().MaLT">@Model.LoaiTin.TenLT</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"></li>
+                </ol>
+            </nav>
+
+            <div style="min-height: 60vh">
+                <br />
+                <h4 style="text-align: center; text-transform: uppercase">@Model.TenT</h4>
+                <br />
+                @Html.Raw(Model.ND)
+                @if (Model.F != null)
+                {
+                    <input id="pageCount" hidden="hidden" value="@ViewBag.pageCount" />
+                    <iframe id="myFrame" onload="resizeIframe(this)" class="embed-responsive-item" src="/readfile/viewer.html?file=/img/ckeditor/Files/@Model.F" style="width:100%;" allowfullscreen webkitallowfullscreen></iframe>
+                }
+            </div>
+        </div>
+        <div class="col-md-12">
+            <br />
+            <h4>
+                TIN CÙNG LOẠI
+            </h4>
+            <ul class="list-group">
+                @foreach (var item in db.Tins.Where(m => m.MaLT == Model.MaLT && m.MaT != Model.MaT && m.Show == true).OrderByDescending(m => m.NgayDang).Take(5).ToList())
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="/Home2019/Content/@item.MaT">@item.TenT</a>
+                        <span class="badge badge-primary badge-pill">@string.Format("{0:dd'/'MM'/'yyyy HH':'mm}", item.NgayDang)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<br />
+<script src="~/Scripts/home2019/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+    function resizeIframe(obj) {
+        var pageCount = $('#pageCount').val();
+        console.log(pageCount);
+        if (pageCount == 0) {
+            pageCount = 1;
+        }
+        obj.style.height = pageCount * 1450 + "px";
+    }
+</script>

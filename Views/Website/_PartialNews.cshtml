@@ -1,0 +1,81 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+<div class="DnnModule DnnModule-Tintc-HinthBoxtin DnnModule-6438">
+    <a name="6438"></a><div id="dnn_ctr6438_ContentPane">
+        <!-- Start_Module_6438 -->
+        <div id="dnn_ctr6438_ModuleContent">
+            <div class="top-section">
+                <span>
+                    @ViewBag.LoaiTin
+                </span>
+            </div>
+            <div class="owl-carousel owl-theme owl-carousel-news category-default-block paragraph-row">
+                @foreach (var item in Model.Select((value, i) => new { i, value }))
+                {
+                    var value = item.value;
+                    var stt = item.i;
+
+                    <div class="item">
+                        <div class="item-header">
+                            <a href="/danh-muc/@value.LoaiTin.khongdau/@value.Link" class="image-hover">
+                                @if (value.H == null)
+                                {
+                                    <img class=" middle" src="~/Content/images/df.jpg" alt="@value.MT">
+                                }
+                                else
+                                {
+
+                                    Uri myuri = new Uri(System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
+
+                                    string checkUrl = myuri.GetLeftPart(UriPartial.Authority) + "/img/ckeditor/Images/thumb/" + value.H;
+
+                                    var req = HttpWebRequest.Create(checkUrl);
+
+                                    req.Method = "HEAD"; //this is what makes it a "HEAD" request
+                                    WebResponse res = null;
+                                    try
+                                    {
+                                        res = req.GetResponse();
+                                        res.Close();
+
+                                        //checkUrl = checkUrl;
+                                    }
+                                    catch
+                                    {
+                                        checkUrl = myuri.GetLeftPart(UriPartial.Authority) + "/img/ckeditor/Images/" + value.H;
+                                    }
+
+                                    <img class=" middle" src="@checkUrl?width=273&amp;height=250&amp;mode=crop&amp;anchor=middle" alt="@value.MT">
+                                }
+                            </a>
+                        </div>
+                        <div class="item-content" style="padding-top: 5px;">
+                            <h3 style="font-size: 14px; font-weight: 600;line-height: 20px;">
+                                <a class="tieu-de-chinh1" style="color:#428bca; font-size: 13px;" href="/danh-muc/@value.LoaiTin.khongdau/@value.Link">@value.TenT</a>
+                            </h3>
+                            <!--<p class="date"><i class="fa fa-calendar" aria-hidden="true"></i>22/11/2017</p>-->
+                            <p class="tieu-de-phu" style="display: block;font-size: 13px;color: #353535;text-align: justify;font-family: Tahoma;">@value.MT</p>
+                            @*<p class="read-more-link"><a href="">Xem chi tiết</a></p>*@
+                        </div>
+                        <div stlyle="clear: both"></div>
+                    </div>
+                    <!-- END .column6 -->
+                }
+            </div>
+            <div class="more"><a href="/danh-muc-tin-tuc/@ViewBag.LinkLoaiTin" class="button">Xem tất cả</a></div>
+        </div><!-- End_Module_6438 -->
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        $('.tieu-de-chinh').succinct({
+            size: 150
+        });
+
+        $('.tieu-de-phu').succinct({
+            size: 150
+        });
+    });
+</script>

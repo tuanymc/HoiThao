@@ -1,0 +1,183 @@
+﻿@using KhoaXayDung.Models
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    var MenuNgang = db.ChitietMenus.Where(w => w.IdCha == null && w.IdMenu == 3004).OrderBy(o => o.STT).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<ChitietMenu> subMenu(int idcha)
+    {
+        var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+        return list;
+    }
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/Home2019/List/" + menu.LoaiTin.MaLT;
+        }
+        //if (menu.LoaiTin != null && (menu.IdLoaiTin == 2077 || menu.IdLoaiTin == 2078 || menu.IdLoaiTin == 2097 || menu.IdLoaiTin == 2098 || menu.IdLoaiTin == 2099 || menu.IdLoaiTin == 2100))
+        //{
+        //    link = "/danh-muc-tin-tuc/" + menu.LoaiTin.khongdau.ToString();
+        //}
+        //if (menu.LoaiTin != null && menu.IdLoaiTin == 2078)
+        //{
+        //    link = "/danh-muc-tin-tuc/" + menu.LoaiTin.khongdau.ToString();
+        //}
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+}
+
+<style>
+    .dropdown-submenu {
+        position: relative;
+    }
+
+        .dropdown-submenu a::after {
+            transform: rotate(-90deg);
+            position: absolute;
+            right: 6px;
+            top: .8em;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-left: .1rem;
+            margin-right: .1rem;
+        }
+</style>
+
+@*<nav class="navbar navbar-expand-lg navbar-light font-weight-bold" style="background-color: #e3f2fd;">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 mx-auto">
+                    @foreach (var _menu in MenuNgang)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Link(_menu)" style="color: rgba(0, 0, 0, 0.75); text-transform: uppercase">@MenuName(_menu)</a>
+                        </li>
+                    }
+                    </ul>
+            </div>
+        </div>
+    </nav>*@
+
+<nav class="navbar navbar-expand-lg navbar-light font-weight-bold" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        @*<a class="navbar-brand" href="#">Navbar</a>*@
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active-li">
+                    <a style="color: rgba(0, 0, 0, 0.75); text-transform: uppercase" class="nav-link" href="@Url.Action("Index")">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                @foreach (var _menu in MenuNgang)
+                {
+                    if (subMenu(_menu.ID).Count() > 0)
+                    {
+                        <li class="nav-item dropdown">
+                            <a style="color: rgba(0, 0, 0, 0.75); text-transform: uppercase" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_@_menu.ID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @MenuName(_menu)
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_@_menu.ID">
+                                @foreach (var _sub in subMenu(_menu.ID))
+                                {
+                                    if (subMenu(_sub.ID).Count() > 0)
+                                    {
+                                        <li class="dropdown-submenu dropdown">
+                                            <a class="dropdown-item dropdown-toggle" href="#">@MenuName(_sub)</a>
+                                            <ul class="dropdown-menu">
+                                                @foreach (var _sub1 in subMenu(_sub.ID))
+                                                {
+                                                    <li><a class="dropdown-item" href="@Link(_sub1)">@MenuName(_sub1)</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="dropdown-item" href="@Link(_sub)">@MenuName(_sub)</a></li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a style="color: rgba(0, 0, 0, 0.75); text-transform: uppercase" class="nav-link" href="@Link(_menu)">@MenuName(_menu)</a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script>
+    $(function () {
+        // this will get the full URL at the address bar
+        var url = window.location.href;
+
+        // passes on every "a" tag
+        $("#navbarText a").each(function () {
+            // checks if its the same on the address bar
+            if (url == (this.href)) {
+                $(this).closest("li").addClass("active-li");
+            }
+        });
+    });
+
+    $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+        if (!$(this).next().hasClass('show')) {
+            $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+        }
+        var $subMenu = $(this).next('.dropdown-menu');
+        $subMenu.toggleClass('show');
+
+
+        $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+            $('.dropdown-submenu .show').removeClass('show');
+        });
+
+
+        return false;
+    });
+</script>

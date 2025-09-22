@@ -1,0 +1,93 @@
+﻿@model KhoaXayDung.Models.Tin
+
+@{
+    ViewBag.Title = "Chi tiết bài đăng";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Chi tiết bài đăng</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ND)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.ND)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.H)
+        </dt>
+
+        <dd>
+            @if(Model.H!=null)
+            {
+                <img src="~/img/ckeditor/Images/@Model.H" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.F)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.F)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Xem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Xem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiTin.TenLT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTin.TenLT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung.HT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung.HT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaT }) |
+    @Html.ActionLink("Danh sách bài đăng", "Index", new { id= Model.MaLT})
+</p>

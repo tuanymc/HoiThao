@@ -1,0 +1,39 @@
+﻿@{
+    int i = 1;
+}
+
+@*<button data-remote="false" data-toggle="modal" data-target="#myModalAddImages" id="addImages" class="btn btn-primary btn-sm">Thêm hình ảnh</button>*@
+
+<span>
+    <a  id="addImages" class="btn btn-primary btn-sm">
+        Thêm hình ảnh
+    </a>
+</span>
+
+<br />
+<br />
+
+@foreach (var image in (IEnumerable<string>)ViewBag.Images)
+{
+    if (i == 1)
+    {
+        @Html.Raw("<div class='row'>")
+    }
+    <div class="col-md-3">
+        <div class="radio">
+            <label class="radiusImages">
+                <input value="@Url.Content(image).Split('/')[4]" type="radio" name="optradio" />
+                <img class="img-responsive" src="@Url.Content(image)" alt="Hejsan" />
+            </label>
+        </div>
+    </div>
+
+    i++;
+    if (i == 5)
+    {
+        @Html.Raw("</div>")
+        i = 1;
+    }
+
+}
+

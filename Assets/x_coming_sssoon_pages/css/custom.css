@@ -1,0 +1,40 @@
+﻿.main .logo.cursive {
+    margin-top: 70px;
+}
+
+.main .motto {
+    min-height: 70px;
+    margin-top: 20px;
+}
+
+.inputUserPass {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 0px !important;
+}
+
+@media (min-width:1200px) {
+    .main .subscribe .form-group {
+        width: auto;
+    }
+}
+
+@media (min-width:991px) {
+    .main .subscribe .form-group {
+        width: auto;
+    }
+}
+
+@media (max-width:400px) {
+    .main .logo.cursive {
+        font-size: 40px;
+    }
+}
+
+.btnRadius {
+    border-radius: 0px;
+}
+
+.alert {
+    border-radius: 0px;
+}

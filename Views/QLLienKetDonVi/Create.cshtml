@@ -1,0 +1,56 @@
+﻿@model KhoaXayDung.Models.Slide
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "QLLienKetDonVi", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row justify-content-md-center">
+                <div class="col-md-11 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Thêm mới liên kết</h4>
+                            <form class="forms-sample">
+                                <div class="form-group">
+                                    <label>Chọn ảnh</label>
+                                    <input type="file" name="AnhSlide" class="form-control" accept="image/*" />
+                                    @Html.ValidationMessageFor(model => model.AnhSlide, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Liên kết</label>
+                                    @Html.EditorFor(model => model.LinkSide, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập link liên kết" } })
+                                    @Html.ValidationMessageFor(model => model.MoTaSlide, "", new { @class = "text-danger" })
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    @Html.EditorFor(model => model.Show)
+                                    @Html.ValidationMessageFor(model => model.Show, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

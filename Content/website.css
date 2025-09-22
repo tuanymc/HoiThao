@@ -1,0 +1,70 @@
+.box_main{min-height:40px;background:#fff;margin-bottom:10px;}
+@media(max-width:767px){.p-c{display:none !important;}
+.di-dong{display:block !important;}
+.section{background:url(./images/tdmulogo.png) top repeat-x}
+.img-di-dong{/*min-height:148px;*/}
+.right, .copyright-di-dong{text-align:center !important;}
+.list-newss{margin:auto;top:0;left:0;right:0;bottom:0;}
+}
+@media(min-width:768px){.p-c{display:block !important;}
+.di-dong{display:none !important;}
+/*.img-di-dong{min-height:400px;}*/
+}
+#ulmenuline{background:#1d86c0;min-height:40px;margin:0px;padding:0px;border-bottom:1px solid #1d86c0;}
+#ulmenuline li{min-height:40px;line-height:40px;display:table-cell;width:1%;text-align:center;}
+#ulmenuline li a{min-height:40px;line-height:40px;text-align:center;display:block;color:#FFFFFF;font-size:14px;font-family:'Roboto Condensed',sans-serif;line-height:40px;min-height:40px;font-weight:bold;text-transform:uppercase;}
+#ulmenuline li{font-size:15px;border-left:1px solid #fff;}
+#ulmenuline li a:hover{color:#FA7D37;}
+#ulmenuline li:last-child{border-right:1px solid #fff;}
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths{position:relative;min-height:1px;padding-right:0;padding-left:5px;padding-top:5px;padding-bottom:5px;}
+.col-xs-5ths{width:20%;float:left;}
+@media (min-width:768px){.col-sm-5ths{width:20%;float:left;}
+}
+@media (min-width:992px){.col-md-5ths{width:20%;float:left;}
+}
+@media (min-width:1200px){.col-lg-5ths{width:20%;float:left;}
+}
+.rowdiv, .rowdiv > div{border:1px solid #fff;background-color:#428bca;}
+.rowdiv img{margin-right:10px;}
+.col-xs-5ths a{color:white;}
+.col-xs-5ths a:hover{color:#d7ff0a;}
+.qc-trung-tam{padding-top:5px;padding-bottom:5px;padding-left:0px;padding-right:0px;border:1px solid #f8f8f8;margin-bottom:15px;background:#f8f8f8;}
+.trung-tam img{border:1px solid #dedede;padding:1px;}
+.trung-tam img:hover{box-shadow:3px 3px #dedede;}
+.box-menu{font-size:12px}
+#w{display:block;max-width:1160px;min-width:300px;margin:0 auto;}
+.crsl-items{display:block;padding:5px 0px 5px 0px;}
+.crsl-item{background:#fff;padding:8px;border:1px solid #d8d6d6;}
+.crsl-item .thumbnail{display:block;width:180px;margin-right:10px;float:left;border-radius:0px;padding:0px;margin-bottom:0px;height:auto;}
+.crsl-item .thumbnail img{display:block;}
+.crsl-item .thumbnail:hover img{opacity:0.8;}
+.crsl-item h3{font-family:arial;font-size:13px;font-weight:bold;text-transform:uppercase;margin:0px;margin-bottom:10px;}
+.crsl-item h3 a{text-decoration:none;color:#428bca;line-height:19px;}
+.crsl-item h3 a:hover{text-decoration:underline;}
+.noidungevent{float:left;width:369px;height:132px;background-color:#f9f9f9;padding:10px;}
+.noidungevent .btn{font-size:12px;}
+.slidernav{position:absolute;right:21px;top:8px;}
+#arrowR, #arrowL{font-family:tahoma;font-size:12px;display:block;width:30px;height:30px;line-height:30px;}
+#arrowR:hover, #arrowL:hover{background:#666666;}
+#arrowR{cursor:pointer;text-align:center;background:#969696;float:right;color:#FFFFFF;}
+#arrowL{cursor:pointer;text-align:center;background:#969696;float:right;margin-right:1px;color:#FFFFFF;}
+.tabs-menu{list-style:none;overflow:auto;}
+.tabs-menu li{float:left;margin:0;padding:0;}
+.tabs-menu a{box-shadow:-4px 0 0 rgba(0, 0, 0, .2);background:#0fb1f4;background:linear-gradient(220deg, transparent 10px, #0fb1f4 10px);text-shadow:0 1px 0 rgba(0, 0, 0, .5);color:#fff;float:left;font:bold 12px/35px 'Lucida sans', Arial, Helvetica;height:35px;padding:0 30px;text-decoration:none;}
+.tabs-menu a:hover{background:#2cb5ef;background:linear-gradient(220deg, transparent 10px, #2cb5ef 10px);}
+.tabs-menu a:focus{outline:0;}
+.tabs-menu .current a{background:#0981b4;background:linear-gradient(220deg, transparent 10px, #0981b4 10px);text-shadow:none;color:#fff;}
+.tab{background-color:#fff;background-image:linear-gradient(top, #fff, #ddd);}
+.tab-content{display:none;font-size:15px;}
+#dbdv .tab-content{display:block;}
+#tab-1{display:block;}
+.panel-tabs .panel-heading{cursor:pointer;}
+#accordion .panel-tabs .panel-title{font-weight:bold;color:black;padding:0px;border-bottom:0px;}
+#accordion .panel-tabs .panel-heading{background-color:#cccccc;width:300px;padding:10px;}
+#accordion .panel-tabs .panel-heading:hover{background-color:#48d8ff;width:300px;padding:10px;}
+#accordion .panel-tabs .panel-body{background-color:#fff;}
+.panel-tabs{border:none;}
+.panel-tabs .panel-content{color:black;background-color:#fff;}

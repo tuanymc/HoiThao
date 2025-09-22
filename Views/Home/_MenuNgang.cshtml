@@ -1,0 +1,166 @@
+﻿@using KhoaXayDung.Models
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    //var gt = db.Tins.Find(6125);
+    //var cocau = db.Tins.Find(7121);
+    //var tamnhin = db.Tins.Find(8181);
+    //var banchunhiem = db.Tins.Find(8179);
+    //var thanhtich = db.Tins.Find(8180);
+    //var hoidong = db.Tins.Find(8182);
+
+    //var bomontoan = db.LoaiTins.Find(1053);
+    //var bomonly = db.LoaiTins.Find(1054);
+    //var bomonhoa = db.LoaiTins.Find(1055);
+
+
+
+
+
+    //var tintuc = db.LoaiTins.Find(41);
+    //var thongbao = db.LoaiTins.Find(46);
+    //var gv = db.LoaiTins.Find(42);
+    //var sv = db.LoaiTins.Find(43);
+    //var bieumau = db.LoaiTins.Find(44);
+    //var lct = db.LoaiTins.Find(45);
+    //var lh = db.Tins.Find(7121);
+    //   var nn = db.LoaiTins.Find(1040);
+    //   var ys = db.LoaiTins.Find(1041);
+    //    var vs = db.LoaiTins.Find(1042);
+    //var daotao = db.LoaiTins.Find(1043);
+    //var daotaocd = db.LoaiTins.Find(1051);
+    //var daotaodh = db.LoaiTins.Find(1052);
+    //    var dtht = db.LoaiTins.Find(1044);
+    //  var nlc = db.LoaiTins.Find(1045);
+    //  var td = db.LoaiTins.Find(1046);
+    var MenuNgang = db.ChitietMenus.Where(w => w.IdCha == null && w.IdMenu == 3).OrderBy(o => o.STT).ToList();
+}
+@functions {
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+
+    public List<ChitietMenu> subMenu(int idcha)
+    {
+        var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+        return list;
+    }
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/danh-muc/" + menu.LoaiTin.khongdau.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+
+}
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="@Url.Action("Index", "Home")">Trang Chủ <span class="sr-only">(current)</span></a></li>
+                @foreach (var _menu in MenuNgang)
+                {
+                    if (subMenu(_menu.ID).Count() > 0)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@MenuName(_menu)<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach (var _sub in subMenu(_menu.ID))
+                                {
+                                    <li><a href="@Link(_sub)">@MenuName(_sub)</a></li>
+                                }
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a href="@Link(_menu)">@MenuName(_menu)</a></li>
+                    }
+                }
+                @*<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Giới thiệu<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau=gt.LoaiTin.khongdau, link=gt.Link })">@gt.TenT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau=tamnhin.LoaiTin.khongdau, link=tamnhin.Link })">@tamnhin.TenT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau = cocau.LoaiTin.khongdau, link = cocau.Link })">@cocau.TenT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau=banchunhiem.LoaiTin.khongdau, link= banchunhiem.Link })">@banchunhiem.TenT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau=thanhtich.LoaiTin.khongdau, link=thanhtich.Link })">@thanhtich.TenT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryIndex", new { khong_dau=hoidong.LoaiTin.khongdau, link=hoidong.Link })">@hoidong.TenT</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Đào tạo<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=daotaocd.khongdau })">@daotaocd.TenLT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=daotaodh.khongdau })">@daotaodh.TenLT</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bộ môn<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=bomontoan.khongdau })">@bomontoan.TenLT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=bomonly.khongdau })">@bomonly.TenLT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=bomonhoa.khongdau })">@bomonhoa.TenLT</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nghiên cứu khoa học<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=gv.khongdau })">@gv.TenLT</a></li>
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=sv.khongdau })">@sv.TenLT</a></li>
+                        </ul>
+                    </li>*@
+
+                @*
+                    <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=tintuc.khongdau })">@tintuc.TenLT</a></li>
+                    <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=thongbao.khongdau })">@thongbao.TenLT</a></li>*@
+
+                @*<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sản phẩm<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=dtht.khongdau })">@dtht.TenLT</a></li>
+                                <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=nlc.khongdau })">@nlc.TenLT</a></li>
+                                <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=td.khongdau })">@td.TenLT</a></li>
+                        </ul>
+                    </li>*@
+                @*<li><a href="@Url.RouteUrl("CalendarIndex")">@lct.TenLT</a></li>
+                    <li><a href="@Url.RouteUrl("CategoryList", new { khong_dau=bieumau.khongdau })">@bieumau.TenLT</a></li>*@
+            </ul>
+        </div>
+    </div>
+</nav>

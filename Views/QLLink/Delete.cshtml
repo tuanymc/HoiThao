@@ -1,0 +1,41 @@
+﻿@model KhoaXayDung.Models.LinkTuDo
+
+@{
+    ViewBag.Title = "Xóa link tự do";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Xóa link tự do</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên link
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Danh sách link", "Index")
+        </div>
+    }
+</div>

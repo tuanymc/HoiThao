@@ -1,0 +1,125 @@
+﻿@model KhoaXayDung.Models.Page
+
+@{
+    ViewBag.Title = "Thêm trang";
+    Layout = "~/Views/Shared/_LayoutQL.cshtml";
+}
+
+<h2>Thêm trang</h2>
+
+@using (Html.BeginForm("Create", "QLPages", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="mainform">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenT, "Tên Trang", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="frmMT">
+                @Html.LabelFor(model => model.MT, "Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MT, new { htmlAttributes = new { @class = "form-control", style = "height:100px;resize:vertical;" } })
+                    @Html.ValidationMessageFor(model => model.MT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group" id="frmHinh">
+                @Html.LabelFor(model => model.H, "Hình", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.H, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input type="file" name="H" id="Hinh" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.H, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="frmFile">
+                @Html.LabelFor(model => model.F, "File", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.F, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input type="file" name="F" id="File" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.F, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.NgayDang, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NgayDang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgayDang, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Xem, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Xem, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Xem, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Show, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Show)
+                            @Html.ValidationMessageFor(model => model.Show, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.MaND, "MaND", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("MaND", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaND, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group" id="frmND">
+                @Html.LabelFor(model => model.ND, "Nội Dung", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ND, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ND, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Danh sách bài đăng", "Index")
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+    var editor = CKEDITOR.replace('ND');
+    CKFinder.setupCKEditor(editor, '/ckfinder');
+</script>
+

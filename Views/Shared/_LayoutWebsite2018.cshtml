@@ -1,0 +1,318 @@
+﻿@using KhoaXayDung.Models;
+@{
+    KhoaXayDungEntities db = new KhoaXayDungEntities();
+    var ttdv = db.Infoes.Find(1);
+
+    var listFooterThongTin = db.ChitietMenus.Where(m => m.IdMenu == 2004).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuThongTin = listFooterThongTin.FirstOrDefault().Menu.TenMenu;
+
+    var listFooterDanhChoNguoiHoc = db.ChitietMenus.Where(m => m.IdMenu == 2005).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuDanhChoNguoiHoc = listFooterDanhChoNguoiHoc.FirstOrDefault().Menu.TenMenu;
+
+    var listFooterDanhChoCVCNV = db.ChitietMenus.Where(m => m.IdMenu == 2006).OrderBy(m => m.STT).ToList();
+    ViewBag.MenuDanhChoCVCNV = listFooterDanhChoCVCNV.FirstOrDefault().Menu.TenMenu;
+}
+
+@functions {
+    @KhoaXayDungEntities db = new KhoaXayDungEntities();
+    public List<ChitietMenu> subMenu(int idcha)
+    {
+        var list = db.ChitietMenus.Where(w => w.IdCha == idcha).OrderBy(o => o.STT).ToList();
+        return list;
+    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    public string Link(ChitietMenu menu)
+    {
+        string link = "#";
+        if (menu.Page != null)
+        {
+            link = "/bai-viet/" + ((menu.Page.Link != null) ? menu.Page.Link.ToString() : "");
+        }
+        if (menu.LoaiTin != null)
+        {
+            link = "/danh-muc/" + menu.LoaiTin.khongdau.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            link = ((menu.LinkTuDo.Link != null) ? menu.LinkTuDo.Link.ToString() : "");
+        }
+        return link;
+    }
+    public string MenuName(ChitietMenu menu)
+    {
+        string Menu = "";
+        if (menu.Page != null)
+        {
+            Menu = menu.Page.TenT.ToString();
+        }
+        if (menu.LoaiTin != null)
+        {
+            Menu = menu.LoaiTin.TenLT.ToString();
+        }
+        if (menu.LinkTuDo != null)
+        {
+            Menu = menu.LinkTuDo.TenLink.ToString();
+        }
+        return Menu;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+
+    @*<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,vietnamese' rel='stylesheet' type='text/css' />*@
+
+    <link href="~/Content/website_2017/css.css" rel="stylesheet" /> 
+    @Styles.Render("~/Content/website_2017/cssWeb2018")
+    @Styles.Render("~/Content/cssWeb2018")
+
+    <style>
+        .justi .justified {
+            position: absolute;
+            left: 0%;
+        }
+
+        #footer {
+            position: inherit;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="head">
+        <div class="menu-top">
+            @Html.Action("_MenuTop", "Website")
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row banner">
+                    <div class="col-md-12 p-c">
+                        <div id="logo">
+                            <a id="dnn_HeaderTop_dnnLOGO_hypLogo" title="Khoa Kinh Tế - Trường Đại Học Thủ Dầu Một" href="/">
+                                <img id="dnn_HeaderTop_dnnLOGO_imgLogo" src="~/img/website/logo.png" alt="Khoa Kinh Tế - Trường Đại Học Thủ Dầu Một" style="border-width:0px;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xs-12 di-dong">
+                        <div id="logo">
+                            <a id="dnn_HeaderTop_dnnLOGO_hypLogo" title="Khoa Kinh Tế - Trường Đại Học Thủ Dầu Một" href="/">
+                                <img id="dnn_HeaderTop_dnnLOGO_imgLogo" src="~/img/website/didong.png" alt="Khoa Kinh Tế - Trường Đại Học Thủ Dầu Một" style="border-width:0px;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-main" style="background: #1d86c0">
+            <div class="container">
+                <div class="content-menu" style="width: auto;">
+                    <div id="cssmenu" class="justified">
+                        @Html.Action("_MenuNgang", "Website")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        @RenderBody()
+        <div id="footer">
+            <div class="top-ft">
+                <div class="container addr">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-12 add1a">
+                            <h4>Địa Chỉ</h4>
+                            <div><em class="fa fa-map-marker"></em>&nbsp;@ttdv.DC</div>
+                            <div><em class="fa fa-phone"></em>&nbsp;@ttdv.Phone</div>
+                            <div><em class="fa fa-envelope"></em>&nbsp;@ttdv.Email</div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                            <h4>@ViewBag.MenuThongTin</h4>
+                            <div>
+                                <ul>
+                                    @foreach (var item in listFooterThongTin)
+                                    {
+                                        <li>
+                                            <a href="@Link(item)" target=_self>
+                                                <i class='fa fa-1x fa-angle-double-right'></i> @MenuName(item)
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                            <h4>@ViewBag.MenuDanhChoNguoiHoc</h4>
+                            <div>
+                                <ul>
+                                    @foreach (var item in listFooterDanhChoNguoiHoc)
+                                    {
+                                        <li>
+                                            <a href="@Link(item)" target=_self>
+                                                <i class='fa fa-1x fa-angle-double-right'></i> @MenuName(item)
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 add1">
+                            <h4>@ViewBag.MenuDanhChoCVCNV</h4>
+                            <div>
+                                <ul>
+                                    @foreach (var item in listFooterDanhChoCVCNV)
+                                    {
+                                        <li>
+                                            <a href="@Link(item)" target=_self>
+                                                <i class='fa fa-1x fa-angle-double-right'></i> @MenuName(item)
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="end-ft">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-12 col-xs-12 col-12 copyright-di-dong">
+                            @ttdv.Ten
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12 col-12 right">
+                            &copy; 2018, made with <i class="fa fa-heart heart" style="color:white"></i> by <a title="Trung Tâm CNTT - Trường Đại Học Thủ Dầu Một" href="https://itc.tdmu.edu.vn/">ITC</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jsWeb2018")
+
+    @*<script type="text/javascript" language="javascript">
+            function doSearchSite() {
+                var str = '';
+                str = document.getElementById('seach-box').value;
+                var str2 = str.replace("Tìm kiếm...", "");
+                if (str2.toString() != '') {
+                    window.open('/tim-kiem.html?q=' + encodeURI(str2), "_self");
+                }
+                else {
+                    alert("Nhập từ khóa tìm kiếm");
+                }
+            }
+            function checkKeypressSearchTop(e) {
+                var kC = (window.event) ? event.keyCode : e.keyCode;  // MSIE : Firefox
+                if (kC == 13) {
+                    doSearchSite();   // if ENTER then ignore
+                    return false;
+                }
+            }
+            function OnBlur(sender, msg) {
+                if (sender && sender.value == "") {
+                    sender.value = msg;
+                }
+            }
+
+            function Onfocus(sender) {
+                sender.value = "";
+            }
+        </script>*@
+
+    <script>
+        var width = $('.container').width();
+        var widthmenu = $('.content-menu').width();
+        if (width > 1000) {
+            $('.justified').css('margin-left', +((width - widthmenu) / 2) + 'px');
+        }
+    </script>
+
+    <script>
+        var id = $(window).height();
+        $('#list_news').css('min-height', (id - 300) + 'px');
+    </script>
+
+    <script>
+        $(function () {
+            $('.crsl-items').carousel({
+                visible: 2,
+                itemMinWidth: 180,
+                itemEqualHeight: 370,
+                itemMargin: 5,
+            });
+
+            $("a[href=#]").on('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('.dropdown').hover(function () {
+                $(this).addClass('open');
+            },
+                function () {
+                    $(this).removeClass('open');
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /* Basic Gallery */
+            $('.swipebox').swipebox();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel-news').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false,
+                        margin: 40
+                    },
+                    600: {
+                        items: 2,
+                        nav: false,
+                        margin: 20
+                    },
+                    1000: {
+                        items: 4,
+                        nav: false,
+                        loop: true,
+                        margin: 40
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73884539-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-73884539-1');
+    </script>
+
+</body>
+</html>

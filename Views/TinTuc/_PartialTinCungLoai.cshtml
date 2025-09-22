@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<KhoaXayDung.Models.Tin>
+
+<div class="mylist">
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item"><a href="@Url.Action("index","TinTuc",new { id= item.MaT})"><i class="fa fa-long-arrow-right"></i> @item.TenT</a></li>
+        }
+
+    </ul>
+</div>

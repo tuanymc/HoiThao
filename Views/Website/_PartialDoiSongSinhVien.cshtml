@@ -1,0 +1,48 @@
+﻿@model IEnumerable<KhoaXayDung.Models.Tin>
+
+@if (Model.Count() > 0)
+{
+    <div id="dnn_ctr9970_ModuleContent">
+        <div class="blognewsvd">
+            <div class="khunganh">
+                <a href="#">
+                    <img class="anhrdaidien" style="width:288px; height:201px;" src="~/img/ckeditor/Images/@ViewBag.Anh?width=288&amp;height=201&amp;mode=crop&amp;anchor=middle">
+                </a>
+            </div>
+            <div class="noidungvd">
+                <div class="catname">
+                    <h1>@ViewBag.LoaiTin</h1>
+                </div>
+                <div class="noidungvdnews">
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <a class="tieu-de-dssv" href="/danh-muc/@item.LoaiTin.khongdau/@item.Link">@item.TenT</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="more">
+                    <a href="/danh-muc-tin-tuc/@ViewBag.LinkLoaiTin" class="button">
+                        Xem thêm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        $('.tieu-de-dssv').succinct({
+            size: 80
+        });
+    });
+</script>
+
